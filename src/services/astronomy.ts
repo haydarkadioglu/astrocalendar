@@ -80,6 +80,12 @@ function translateDateInfo(dateStr: string): string {
     return result;
 }
 
+// Parse "Jan 3" or "Jan 3/4" into a valid Date object for the current year
+function parseEventDate(dateStr: string, year: number): Date {
+    const cleanDate = dateStr.split('/')[0].trim();
+    return new Date(`${cleanDate} ${year}`);
+}
+
 export async function fetchAstronomicalEvents(): Promise<AstronomyEvent[]> {
     try {
         const res = await fetch('https://www.timeanddate.com/astronomy/sights-to-see.html', {
@@ -93,6 +99,7 @@ export async function fetchAstronomicalEvents(): Promise<AstronomyEvent[]> {
         const html = await res.text();
         const $ = cheerio.load(html);
         const events: AstronomyEvent[] = [];
+        const currentYear = new Date().getFullYear();
 
         $('article h2, article h3, .article__content h2, .article__content h3').each((i, el) => {
             const rawText = $(el).text().trim();
@@ -121,7 +128,17 @@ export async function fetchAstronomicalEvents(): Promise<AstronomyEvent[]> {
             }
         });
 
-        return events;
+        // Filter out past events
+        const now = new Date();
+        // Reset time to start of day for accurate comparison
+        now.setHours(0, 0, 0, 0);
+
+        const upcomingEvents = events.filter(event => {
+            const eventDate = parseEventDate(event.dateEn, currentYear);
+            return eventDate.getTime() >= now.getTime();
+        });
+
+        return upcomingEvents;
     } catch (error) {
         console.error('Scraping error:', error);
         return [];
