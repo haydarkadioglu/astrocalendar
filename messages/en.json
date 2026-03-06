@@ -79,5 +79,26 @@
         "locationBtn": "Use My Location",
         "detecting": "Detecting location...",
         "error": "Could not access location. Please check your browser permissions."
+    },
+    "Missions": {
+        "title": "Space",
+        "titleStrong": "Missions Archive",
+        "subtitle": "A historical timeline of humanity's greatest achievements in space exploration. From the first steps on the Moon to the deepest corners of the universe.",
+        "filters": {
+            "all": "All Missions",
+            "crewed": "Crewed",
+            "robotic": "Robotic Probes",
+            "telescope": "Space Telescopes"
+        },
+        "status": {
+            "completed": "Completed",
+            "active": "Active",
+            "planned": "Planned"
+        },
+        "details": {
+            "agency": "Agency",
+            "launchDate": "Launch Date",
+            "destination": "Destination"
+        }
     }
 }

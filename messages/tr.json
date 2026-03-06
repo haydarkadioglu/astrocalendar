@@ -79,5 +79,26 @@
         "locationBtn": "Konumumu Kullan",
         "detecting": "Konum tespit ediliyor...",
         "error": "Konuma erişilemedi. Lütfen tarayıcı izinlerinizi kontrol edin."
+    },
+    "Missions": {
+        "title": "Uzay",
+        "titleStrong": "Görevleri Arşivi",
+        "subtitle": "İnsanlığın uzay keşfindeki en büyük başarılarının tarihi zaman çizelgesi. Ay'daki ilk adımlardan evrenin en derin köşelerine...",
+        "filters": {
+            "all": "Tüm Görevler",
+            "crewed": "İnsanlı",
+            "robotic": "Robotik Sondalar",
+            "telescope": "Uzay Teleskopları"
+        },
+        "status": {
+            "completed": "Tamamlandı",
+            "active": "Aktif",
+            "planned": "Planlanan"
+        },
+        "details": {
+            "agency": "Ajans",
+            "launchDate": "Fırlatma Tarihi",
+            "destination": "Hedef"
+        }
     }
 }
