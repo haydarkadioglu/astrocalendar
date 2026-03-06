@@ -13,6 +13,7 @@ export interface AstronomyEvent {
     descriptionTr: string;
     intensityEn: string;
     intensityTr: string;
+    rawDate: number;
 }
 
 // Simple categorization helper
@@ -114,31 +115,26 @@ export async function fetchAstronomicalEvents(): Promise<AstronomyEvent[]> {
 
             if (title && nextP) {
                 const categoryInfo = categorizeEvent(title);
+                const eventDate = parseEventDate(dateEn, currentYear);
 
                 events.push({
                     id: `event-${i}`,
                     titleEn: title,
-                    titleTr: title, // Ideally we'd translate this with an API, but we keep EN for now
+                    titleTr: title,
                     dateEn: dateEn,
                     dateTr: translateDateInfo(dateEn),
                     descriptionEn: nextP,
-                    descriptionTr: nextP, // Also ideally translated
+                    descriptionTr: nextP,
+                    rawDate: eventDate.getTime(),
                     ...(categoryInfo as any)
                 });
             }
         });
 
-        // Filter out past events
-        const now = new Date();
-        // Reset time to start of day for accurate comparison
-        now.setHours(0, 0, 0, 0);
+        // Sort chronologically
+        events.sort((a, b) => a.rawDate - b.rawDate);
 
-        const upcomingEvents = events.filter(event => {
-            const eventDate = parseEventDate(event.dateEn, currentYear);
-            return eventDate.getTime() >= now.getTime();
-        });
-
-        return upcomingEvents;
+        return events;
     } catch (error) {
         console.error('Scraping error:', error);
         return [];
