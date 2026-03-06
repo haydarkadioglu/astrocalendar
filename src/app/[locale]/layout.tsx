@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Space_Grotesk } from "next/font/google";
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import Navbar from "@/components/Navbar";
@@ -18,10 +18,22 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "AstroCalendar | Amatör Astronomi Rehberi",
-  description: "Gökyüzü olayları, uzay görevleri ve amatör astronomlar için gözlem rehberi.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    keywords: t('keywords'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      type: "website",
+      locale: locale,
+    }
+  };
+}
 
 export default async function RootLayout({
   children,
@@ -44,7 +56,7 @@ export default async function RootLayout({
       <body className={`${outfit.variable} ${spaceGrotesk.variable}`}>
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Navbar />
-          <main style={{ minHeight: '80vh' }}>
+          <main className="page-transition" style={{ minHeight: '80vh' }}>
             {children}
           </main>
           <Footer />

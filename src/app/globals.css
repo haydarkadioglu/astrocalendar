@@ -1,20 +1,25 @@
 :root {
   /* Deep Space Backgrounds */
-  --space-dark: #05050A; /* Very deep dark blue/black */
+  --space-dark: #05050A;
+  /* Very deep dark blue/black */
   --space-darker: #020205;
   --space-light: #1A1A2E;
-  
+
   /* Text Colors */
   --text-primary: #FFFFFF;
   --text-secondary: #A0A0B0;
   --text-muted: #606070;
-  
+
   /* Neon Accents for Astronomic Elements */
-  --accent-blue: #00F0FF; /* Sci-fi blue */
-  --accent-purple: #B200FF; /* Nebula purple */
-  --accent-orange: #FF5A00; /* Star/Sun orange */
-  --accent-green: #00FF66; /* Aurora green */
-  
+  --accent-blue: #00F0FF;
+  /* Sci-fi blue */
+  --accent-purple: #B200FF;
+  /* Nebula purple */
+  --accent-orange: #FF5A00;
+  /* Star/Sun orange */
+  --accent-green: #00FF66;
+  /* Aurora green */
+
   /* Glassmorphism Variables */
   --glass-bg: rgba(26, 26, 46, 0.4);
   --glass-border: rgba(255, 255, 255, 0.1);
@@ -34,7 +39,7 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   background-color: var(--space-darker);
-  background-image: 
+  background-image:
     radial-gradient(circle at 15% 50%, rgba(0, 240, 255, 0.03) 0%, transparent 50%),
     radial-gradient(circle at 85% 30%, rgba(178, 0, 255, 0.03) 0%, transparent 50%);
   color: var(--text-primary);
@@ -74,4 +79,21 @@ a:hover {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Page Transitions and Micro Animations */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.page-transition {
+  animation: fadeInScale 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }

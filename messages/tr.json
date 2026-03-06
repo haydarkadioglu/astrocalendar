@@ -100,5 +100,10 @@
             "launchDate": "Fırlatma Tarihi",
             "destination": "Hedef"
         }
+    },
+    "Metadata": {
+        "title": "AstroCalendar | Amatör Astronomi Rehberi",
+        "description": "Gökyüzü olayları, uzay görevleri ve amatör astronomlar için nihai gözlem rehberi.",
+        "keywords": "astronomi, uzay, takvim, gökyüzü olayları, meteor yağmuru, gezegenler, NASA, APOD"
     }
 }
