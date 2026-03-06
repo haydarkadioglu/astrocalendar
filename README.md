@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌌 AstroCalendar
 
-## Getting Started
+![AstroCalendar Banner](https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=1200)
 
-First, run the development server:
+**AstroCalendar** is a modern, multilingual (English/Turkish) Sky Calendar and Space Encyclopedia featuring a "premium cosmic aesthetic," designed specifically for amateur astronomers and space enthusiasts.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features (Current & Planned)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 🌍 **Multilingual Support:** Seamlessly switch between English and Turkish interfaces using `next-intl`.
+- 📅 **Astronomical Calendar:** Detailed calendar cards for meteor showers, satellite/ISS passes, eclipses, and planetary alignments.
+- 🔭 **Encyclopedia of Celestial Bodies:** Summarized information about the members of the Solar System and deep space objects.
+  - **Live Search:** Supports instant search and fetching of summaries/images directly from Wikipedia using a custom proxy API (`/api/wiki`)! For example, try searching for *"Sirius"*, *"Betelgeuse"*, *"Apollo 11"*.
+- 🗺️ **Interactive Sky Map (Planetarium):** Real-time star map display based on device location *(Coming Soon)*.
+- ⏱️ **Observation Planner & Weather:** Alert modules for light pollution (Bortle), atmospheric seeing, and moon phases *(Coming Soon)*.
+- 📚 **Space Missions Archive:** Details and records of historical space launches and missions *(Coming Soon)*.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎨 Design & Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework:** Next.js (App Router) + React
+- **Styling:** Pure / Vanilla CSS (`.module.css`)
+- **Design Language:** Cosmic concept. Deep space backgrounds, **Glassmorphism** effects, soft glows (neon), modern typography, and smooth transitions.
+- **External Data APIs:** Wikipedia REST API. (NASA APOD, N2YO for satellite tracking, etc. to be added in the future).
 
-## Learn More
+## 🛠️ Installation & Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+To run the project locally on your machine, follow these steps:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Install Dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Start the Development Server:**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   ```
 
-## Deploy on Vercel
+3. **View the Application:**
+   Open [http://localhost:3000](http://localhost:3000) with your browser to experience AstroCalendar! The page will automatically open according to your default language (e.g. /en). You can easily switch the language from the menu.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🌌 Architectural Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `src/i18n/`: Multilingual configuration files
+- `messages/`: English (`en.json`) and Turkish (`tr.json`) dictionary translations
+- `src/app/[locale]/`: Localized routing implementation
+- `src/components/`: Reusable components (EventCard, BodyCard, LiveSearch, etc.)
+- `src/services/` & `src/app/api/`: External API connection functions and CORS proxy services.
+
+---
+*Keep your eyes on the stars.* ✨
