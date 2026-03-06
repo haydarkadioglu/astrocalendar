@@ -1,0 +1,38 @@
+.switcher {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 8px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.langBtn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.langBtn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.langBtn.active {
+    color: #fff;
+    background: var(--accent-blue);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+.divider {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}

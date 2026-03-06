@@ -1,0 +1,68 @@
+.navbar {
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 90%;
+    border-radius: 50px;
+    /* Pill shape */
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.navLinks {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.switcherContainer {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    padding-left: 1rem;
+}
+
+.link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent-blue);
+    transition: width 0.3s ease;
+}
+
+.link:hover {
+    color: var(--accent-blue);
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+}
+
+.link:hover::after {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .navLinks {
+        display: none;
+        /* Mobile menu will be separate if needed */
+    }
+}
