@@ -77,7 +77,12 @@
         "titleStrong": "Sky Map",
         "subtitle": "Explore the night sky from any location. Drag to pan, scroll to zoom, and click on stars or planets to learn more.",
         "locationBtn": "Use My Location",
+        "fullscreenBtn": "Full Screen",
         "detecting": "Detecting location...",
+        "city": "City",
+        "cityPlaceholder": "Enter a city name...",
+        "setLocation": "Search",
+        "cityNotFound": "City could not be found.",
         "error": "Could not access location. Please check your browser permissions."
     },
     "Missions": {

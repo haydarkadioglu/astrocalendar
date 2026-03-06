@@ -77,7 +77,12 @@
         "titleStrong": "Gökyüzü Haritası",
         "subtitle": "Gece gökyüzünü dilediğiniz konumdan keşfedin. Kaydırmak için sürükleyin, yakınlaştırmak için tekerleği kullanın ve cisimlere tıklayın.",
         "locationBtn": "Konumumu Kullan",
+        "fullscreenBtn": "Tam Ekran",
         "detecting": "Konum tespit ediliyor...",
+        "city": "Şehir",
+        "cityPlaceholder": "Bir şehir adı girin...",
+        "setLocation": "Ara",
+        "cityNotFound": "Girdiğiniz şehir bulunamadı.",
         "error": "Konuma erişilemedi. Lütfen tarayıcı izinlerinizi kontrol edin."
     },
     "Missions": {
