@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import styles from './page.module.css';
+import { fetchSpaceXLaunches } from '@/services/spacex';
 
 // Static Data for Timeline (Server-Side)
 const MISSIONS_DATA = [
@@ -80,6 +81,37 @@ export default async function MissionsPage({ params }: { params: Promise<{ local
     // We await translations in Next 15 Server components
     const t = await getTranslations({ locale, namespace: 'Missions' });
 
+    // Fetch Live SpaceX Launches
+    const spacexLaunches = await fetchSpaceXLaunches();
+
+    // Map SpaceX data to match timeline format
+    const mappedSpaceX = spacexLaunches.map(launch => ({
+        id: launch.id,
+        titleEn: launch.name,
+        titleTr: launch.name,
+        dateEn: new Date(launch.date_utc).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+        dateTr: new Date(launch.date_utc).toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' }),
+        rawDate: new Date(launch.date_utc).getTime(),
+        status: launch.upcoming ? 'planned' : (launch.success ? 'completed' : 'active'), // using active as fallback for failed/unknown
+        type: 'robotic',
+        descEn: launch.details || (launch.upcoming ? 'Upcoming SpaceX mission.' : 'A SpaceX orbital launch mission.'),
+        descTr: launch.details ? `(İngilizce) ${launch.details}` : (launch.upcoming ? 'Planlanan SpaceX fırlatması.' : 'SpaceX yörünge fırlatma görevi.'),
+        agency: 'SpaceX',
+        destinationEn: 'Earth Orbit / LEO',
+        destinationTr: 'Dünya Yörüngesi',
+        patch: launch.links?.patch?.small
+    }));
+
+    // Map static missions with rawDate for sorting
+    const mappedStatic = MISSIONS_DATA.map(m => ({
+        ...m,
+        rawDate: new Date(m.dateEn).getTime(),
+        patch: null
+    }));
+
+    // Combine and sort missions descending (newest first)
+    const allMissions = [...mappedStatic, ...mappedSpaceX].sort((a, b) => b.rawDate - a.rawDate);
+
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -97,14 +129,19 @@ export default async function MissionsPage({ params }: { params: Promise<{ local
             </header>
 
             <div className={styles.timeline}>
-                {MISSIONS_DATA.map((mission) => (
+                {allMissions.map((mission) => (
                     <div key={mission.id} className={styles.timelineItem}>
                         <div className={styles.timelineDot}></div>
                         <div className={styles.timelineCard}>
                             <div className={styles.cardHeader}>
-                                <div>
-                                    <h3 className={styles.cardTitle}>{locale === 'en' ? mission.titleEn : mission.titleTr}</h3>
-                                    <span className={styles.cardDate}>{locale === 'en' ? mission.dateEn : mission.dateTr}</span>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                    {mission.patch && (
+                                        <img src={mission.patch} alt="Mission Patch" style={{ width: '45px', height: '45px', objectFit: 'contain' }} />
+                                    )}
+                                    <div>
+                                        <h3 className={styles.cardTitle}>{locale === 'en' ? mission.titleEn : mission.titleTr}</h3>
+                                        <span className={styles.cardDate}>{locale === 'en' ? mission.dateEn : mission.dateTr}</span>
+                                    </div>
                                 </div>
                                 <span className={`${styles.statusBadge} ${mission.status === 'completed' ? styles.statusCompleted : styles.statusActive}`}>
                                     {t(`status.${mission.status}`)}

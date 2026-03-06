@@ -27,6 +27,7 @@ export default function Footer() {
                     <a href="https://api.nasa.gov/" target="_blank" rel="noreferrer">NASA Open APIs</a>
                     <a href="https://thespacedevs.com/llapi" target="_blank" rel="noreferrer">Launch Library</a>
                     <a href="https://openweathermap.org/" target="_blank" rel="noreferrer">Weather Forecasts</a>
+                    <a href="https://www.timeanddate.com/" target="_blank" rel="noreferrer">Time and Date API</a>
                 </div>
             </div>
 

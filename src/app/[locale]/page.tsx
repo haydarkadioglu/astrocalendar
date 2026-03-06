@@ -4,6 +4,7 @@ import styles from './page.module.css';
 import EventCard from '@/components/EventCard';
 import ObservationConditions from '@/components/ObservationConditions';
 import { fetchApod } from '@/services/nasa';
+import { fetchAstronomicalEvents } from '@/services/astronomy';
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -14,6 +15,10 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const apodImage = apodData?.media_type === 'image' ? (apodData.url || apodData.hdurl) : 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=1200';
   const apodTitle = apodData?.title || 'Andromeda Galaksisi';
   const apodDesc = apodData?.explanation || 'M31 olarak da bilinen bu dev sarmal galaksi, bize en yakın büyük galaksidir.';
+
+  // Fetch upcoming astronomical events (take first 4)
+  const allEvents = await fetchAstronomicalEvents();
+  const upcomingEvents = allEvents.slice(0, 4);
 
   return (
     <div className={styles.container}>
@@ -57,34 +62,22 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </div>
 
         <div className={styles.grid}>
-          <EventCard
-            title="Perseid Meteor Yağmuru"
-            date="12 Ağustos 2026 - Gece Yarısı"
-            category="Meteor Yağmuru"
-            description="Yılın en görkemli meteor yağmuru. Saatte 60-100 arası meteor bekleniyor."
-            intensity="Harika"
-            image="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=80&w=800"
-          />
-          <EventCard
-            title="Uluslararası Uzay İstasyonu (ISS)"
-            date="Bugün - 21:45"
-            category="Uydu Geçişi"
-            description="Kuzeybatı ufkundan yükselecek. Maksimum yükseklik: 68°, Parlaklık: -3.4 mag."
-            intensity="Yüksek"
-          />
-          <EventCard
-            title="Jüpiter ve Satürn Yakınlaşması"
-            date="24 Ağustos 2026"
-            category="Gezegen Sıralanması"
-            description="İki dev gaz gezegeni gökyüzünde çok yakın konumda izlenebilecek."
-            intensity="Orta"
-          />
-          <EventCard
-            title="SpaceX Falcon Heavy"
-            date="Eylül 2026"
-            category="Fırlatma"
-            description="Europa Clipper sondasını Jüpiter'in uydusuna gönderecek tarihi görev."
-          />
+          {upcomingEvents.length > 0 ? (
+            upcomingEvents.map((event) => (
+              <EventCard
+                key={event.id}
+                title={locale === 'tr' ? event.titleTr : event.titleEn}
+                date={locale === 'tr' ? event.dateTr : event.dateEn}
+                category={locale === 'tr' ? event.categoryTr : event.categoryEn}
+                description={locale === 'tr' ? event.descriptionTr : event.descriptionEn}
+                intensity={locale === 'tr' ? event.intensityTr : event.intensityEn}
+              />
+            ))
+          ) : (
+            <p style={{ color: 'var(--text-secondary)' }}>
+              {locale === 'tr' ? 'Yaklaşan etkinlik bulunamadı.' : 'No upcoming events found.'}
+            </p>
+          )}
         </div>
       </section>
 
