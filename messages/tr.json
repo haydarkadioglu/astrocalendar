@@ -1,0 +1,75 @@
+{
+    "Navigation": {
+        "home": "Günün Görseli",
+        "calendar": "Takvim",
+        "planetarium": "Harita",
+        "encyclopedia": "Ansiklopedi",
+        "archive": "Arşiv"
+    },
+    "HomePage": {
+        "title": "Evrenin Sırlarını",
+        "titleStrong": "Keşfet",
+        "subtitle": "Amatör astronomlar için nihai gözlem takvimi. Yaklaşan meteor yağmurları, gezegen sıralanmaları, uzay istasyonu geçişleri ve atmosferik şartlar bir arada.",
+        "buttonTonight": "Bu Gece Neler Var?",
+        "buttonPlan": "Gözlem Planla",
+        "apodLoading": "NASA APOD Görseli Yükleniyor...",
+        "apodTag": "Günün Görseli",
+        "upcomingEvents": "Yaklaşan",
+        "upcomingEventsStrong": "Gökyüzü Olayları",
+        "viewAll": "Tümünü Gör",
+        "observationConditions": "Bu Gece",
+        "observationConditionsStrong": "Gözlem Şartları",
+        "moonPhase": "Ay Evresi",
+        "cloudCover": "Bulutluluk",
+        "seeing": "Seeing (Türbülans)",
+        "lightPollution": "Işık Kirliliği"
+    },
+    "Encyclopedia": {
+        "title": "Kozmik",
+        "titleStrong": "Ansiklopedi",
+        "subtitle": "Evrenin derinliklerine dalın. Gezegenleri, cüce gezegenleri, uyduları ve uzak galaksileri keşfedin.",
+        "searchPlaceholder": "Bir gök cismi arayın...",
+        "categories": {
+            "all": "Tümü",
+            "planets": "Gezegenler",
+            "moons": "Uydular",
+            "dwarf_planets": "Cüce Gezegenler",
+            "galaxies": "Galaksiler"
+        },
+        "bodyDetails": {
+            "type": "Tür",
+            "distance": "Güneş'e Uzaklık",
+            "radius": "Yarıçap",
+            "gravity": "Yerçekimi",
+            "discoverer": "Kaşif",
+            "readMore": "Wikipedia'da okumaya devam et"
+        }
+    },
+    "Footer": {
+        "tagline": "Amatör astronomlar için nihai gözlem rehberi ve uzay arşivi.",
+        "explore": "Keşfet",
+        "dataSources": "Veri Kaynakları",
+        "rights": "Tüm hakları yıldızlarda saklıdır."
+    },
+    "Calendar": {
+        "title": "Astronomik",
+        "titleStrong": "Takvim",
+        "subtitle": "Gökyüzündeki en önemli olayları kaçırmayın. Meteor yağmurları, tutulmalar, örtülmeler ve mükemmel gözlem fırsatları.",
+        "viewModes": {
+            "list": "Liste Görünümü",
+            "grid": "Izgara Görünümü"
+        },
+        "filters": {
+            "all": "Tüm Olaylar",
+            "meteor": "Meteor Yağmurları",
+            "eclipse": "Tutulmalar",
+            "conjunction": "Yakınlaşmalar",
+            "satellite": "Uydular ve ISS"
+        },
+        "months": {
+            "august": "Ağustos 2026",
+            "september": "Eylül 2026",
+            "october": "Ekim 2026"
+        }
+    }
+}

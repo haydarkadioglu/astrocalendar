@@ -1,0 +1,75 @@
+{
+    "Navigation": {
+        "home": "Home",
+        "calendar": "Calendar",
+        "planetarium": "Planetarium",
+        "encyclopedia": "Encyclopedia",
+        "archive": "Archive"
+    },
+    "HomePage": {
+        "title": "Discover the Secrets of the",
+        "titleStrong": "Universe",
+        "subtitle": "The ultimate observation calendar for amateur astronomers. Upcoming meteor showers, planetary alignments, space station passes, and atmospheric conditions all in one place.",
+        "buttonTonight": "What's Up Tonight?",
+        "buttonPlan": "Plan Observation",
+        "apodLoading": "Loading NASA APOD...",
+        "apodTag": "Picture of the Day",
+        "upcomingEvents": "Upcoming",
+        "upcomingEventsStrong": "Sky Events",
+        "viewAll": "View All",
+        "observationConditions": "Observation Conditions",
+        "observationConditionsStrong": "Tonight",
+        "moonPhase": "Moon Phase",
+        "cloudCover": "Cloud Cover",
+        "seeing": "Seeing (Turbulence)",
+        "lightPollution": "Light Pollution"
+    },
+    "Encyclopedia": {
+        "title": "Cosmic",
+        "titleStrong": "Encyclopedia",
+        "subtitle": "Immerse yourself in the depths of the universe. Explore planets, dwarf planets, moons, and distant galaxies.",
+        "searchPlaceholder": "Search for a celestial body...",
+        "categories": {
+            "all": "All",
+            "planets": "Planets",
+            "moons": "Moons",
+            "dwarf_planets": "Dwarf Planets",
+            "galaxies": "Galaxies"
+        },
+        "bodyDetails": {
+            "type": "Type",
+            "distance": "Distance from Sun",
+            "radius": "Radius",
+            "gravity": "Gravity",
+            "discoverer": "Discoverer",
+            "readMore": "Read more on Wikipedia"
+        }
+    },
+    "Footer": {
+        "tagline": "The ultimate observation guide and space archive for amateur astronomers.",
+        "explore": "Explore",
+        "dataSources": "Data Sources",
+        "rights": "All rights reserved among the stars."
+    },
+    "Calendar": {
+        "title": "Astronomical",
+        "titleStrong": "Calendar",
+        "subtitle": "Don't miss the most important events in the sky. Meteor showers, eclipses, occultations, and perfect observation opportunities.",
+        "viewModes": {
+            "list": "List View",
+            "grid": "Grid View"
+        },
+        "filters": {
+            "all": "All Events",
+            "meteor": "Meteor Showers",
+            "eclipse": "Eclipses",
+            "conjunction": "Conjunctions",
+            "satellite": "Satellites & ISS"
+        },
+        "months": {
+            "august": "August 2026",
+            "september": "September 2026",
+            "october": "October 2026"
+        }
+    }
+}
