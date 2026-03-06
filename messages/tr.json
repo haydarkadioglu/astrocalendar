@@ -71,5 +71,13 @@
             "september": "Eylül 2026",
             "october": "Ekim 2026"
         }
+    },
+    "Planetarium": {
+        "title": "İnteraktif",
+        "titleStrong": "Gökyüzü Haritası",
+        "subtitle": "Gece gökyüzünü dilediğiniz konumdan keşfedin. Kaydırmak için sürükleyin, yakınlaştırmak için tekerleği kullanın ve cisimlere tıklayın.",
+        "locationBtn": "Konumumu Kullan",
+        "detecting": "Konum tespit ediliyor...",
+        "error": "Konuma erişilemedi. Lütfen tarayıcı izinlerinizi kontrol edin."
     }
 }

@@ -1,11 +1,19 @@
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import styles from './page.module.css';
 import EventCard from '@/components/EventCard';
 import ObservationConditions from '@/components/ObservationConditions';
+import { fetchApod } from '@/services/nasa';
 
-export default function Home() {
-  const t = useTranslations('HomePage');
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'HomePage' });
+
+  // Fetch dynamic NASA APOD mapping
+  const apodData = await fetchApod();
+  const apodImage = apodData?.media_type === 'image' ? (apodData.url || apodData.hdurl) : 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=1200';
+  const apodTitle = apodData?.title || 'Andromeda Galaksisi';
+  const apodDesc = apodData?.explanation || 'M31 olarak da bilinen bu dev sarmal galaksi, bize en yakın büyük galaksidir.';
 
   return (
     <div className={styles.container}>
@@ -25,15 +33,18 @@ export default function Home() {
           </div>
         </div>
 
-        {/* APOD Placeholder Component */}
+        {/* APOD Dynamic Component */}
         <div className={`glass-panel ${styles.apodCard}`}>
-          <div className={styles.apodImageWrapper}>
-            <div className={styles.apodPlaceholder}>{t('apodLoading')}</div>
+          <div className={styles.apodImageWrapper} style={{ backgroundImage: `url(${apodImage})` }}>
+            {/* Use background image to fit */}
+            {apodData?.media_type === 'video' && (
+              <iframe src={apodData.url} title={apodTitle} style={{ width: '100%', height: '100%', border: 'none' }} />
+            )}
           </div>
           <div className={styles.apodInfo}>
             <span className={styles.apodTag}>{t('apodTag')}</span>
-            <h3>Andromeda Galaksisi</h3>
-            <p>M31 olarak da bilinen bu dev sarmal galaksi, bize en yakın büyük galaksidir.</p>
+            <h3 className={styles.apodTitleText}>{apodTitle}</h3>
+            <p className={styles.apodDescText}>{apodDesc.length > 150 ? apodDesc.substring(0, 150) + '...' : apodDesc}</p>
           </div>
         </div>
       </section>

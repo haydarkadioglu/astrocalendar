@@ -86,6 +86,8 @@
   width: 100%;
   position: relative;
   background: linear-gradient(45deg, #1A1A2E, #2A2A4A);
+  background-size: cover;
+  background-position: center;
 }
 
 .apodPlaceholder {

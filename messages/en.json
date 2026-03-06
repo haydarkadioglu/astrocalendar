@@ -71,5 +71,13 @@
             "september": "September 2026",
             "october": "October 2026"
         }
+    },
+    "Planetarium": {
+        "title": "Interactive",
+        "titleStrong": "Sky Map",
+        "subtitle": "Explore the night sky from any location. Drag to pan, scroll to zoom, and click on stars or planets to learn more.",
+        "locationBtn": "Use My Location",
+        "detecting": "Detecting location...",
+        "error": "Could not access location. Please check your browser permissions."
     }
 }
