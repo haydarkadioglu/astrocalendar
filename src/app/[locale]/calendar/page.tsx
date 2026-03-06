@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import EventCard from '@/components/EventCard';
 import styles from './page.module.css';
 
@@ -63,9 +63,9 @@ const CALENDAR_EVENTS = [
     }
 ];
 
-export default function CalendarPage({ params }: { params: { locale: string } }) {
-    const { locale } = params;
-    const t = useTranslations('Calendar');
+export default async function CalendarPage({ params }: { params: Promise<{ locale: string }> }) {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: 'Calendar' });
 
     return (
         <div className={styles.container}>

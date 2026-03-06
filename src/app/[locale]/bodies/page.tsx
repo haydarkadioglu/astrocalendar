@@ -19,8 +19,8 @@ const BASE_BODIES = [
     { id: 'andromeda', wikiTitleTr: 'Andromeda_Galaksisi', wikiTitleEn: 'Andromeda_Galaxy', typeEn: 'Spiral Galaxy', typeTr: 'Sarmal Galaksi' }
 ];
 
-export default async function BodiesPage({ params }: { params: { locale: string } }) {
-    const { locale } = params;
+export default async function BodiesPage({ params }: { params: Promise<{ locale: string }> }) {
+    const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'Encyclopedia' });
 
     // Fetch initial base data on server side

@@ -3,9 +3,9 @@ import styles from './EventCard.module.css';
 interface EventProps {
     title: string;
     date: string;
-    category: 'Meteor Yağmuru' | 'Tutulma' | 'Gezegen Sıralanması' | 'Fırlatma' | 'Uydu Geçişi';
+    category: string;
     description: string;
-    intensity?: 'Düşük' | 'Orta' | 'Yüksek' | 'Harika';
+    intensity?: string;
     image?: string;
 }
 
