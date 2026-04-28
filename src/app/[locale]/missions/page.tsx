@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { fetchSpaceXLaunches } from '@/services/spacex';
-import { fetchESA, fetchRoscosmos, fetchCNSA, fetchJAXA, fetchISRO } from '@/services/otheragencies';
+import { fetchESA, fetchRoscosmos, fetchCNSA, fetchJAXA, fetchISRO } from '../../../services/otheragencies';
 import MissionTimeline, { Mission } from './MissionTimeline';
 import styles from './page.module.css';
 
