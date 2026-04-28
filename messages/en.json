@@ -21,8 +21,35 @@
         "observationConditionsStrong": "Tonight",
         "moonPhase": "Moon Phase",
         "cloudCover": "Cloud Cover",
-        "seeing": "Seeing (Turbulence)",
-        "lightPollution": "Light Pollution"
+        "seeing": "Seeing",
+        "lightPollution": "Light Pollution",
+        "observation": {
+            "loading": "Loading live observing data...",
+            "refresh": "Refresh",
+            "useMyLocation": "Use My Location",
+            "usingDefaultLocation": "Using default location: Istanbul",
+            "usingCurrentLocation": "Using your current location",
+            "visibility": "Visibility",
+            "darknessWindow": "Darkness Window",
+            "hours": "hours",
+            "unavailable": "Unavailable",
+            "quality": {
+                "excellent": "Excellent",
+                "good": "Good",
+                "fair": "Fair",
+                "poor": "Poor"
+            },
+            "moonPhases": {
+                "newMoon": "New Moon",
+                "waxingCrescent": "Waxing Crescent",
+                "firstQuarter": "First Quarter",
+                "waxingGibbous": "Waxing Gibbous",
+                "fullMoon": "Full Moon",
+                "waningGibbous": "Waning Gibbous",
+                "lastQuarter": "Last Quarter",
+                "waningCrescent": "Waning Crescent"
+            }
+        }
     },
     "Encyclopedia": {
         "title": "Cosmic",
@@ -43,11 +70,15 @@
         },
         "bodyDetails": {
             "type": "Type",
-            "distance": "Distance from Sun",
+            "distance": "Distance",
             "radius": "Radius",
             "gravity": "Gravity",
             "discoverer": "Discoverer",
-            "readMore": "Read more on Wikipedia"
+            "readMore": "Read more on Wikipedia",
+            "viewDetails": "View Details",
+            "backToList": "Back to Encyclopedia",
+            "overview": "Overview",
+            "quickFacts": "Quick Facts"
         }
     },
     "Footer": {
@@ -60,6 +91,12 @@
         "title": "Astronomical",
         "titleStrong": "Calendar",
         "subtitle": "Don't miss the most important events in the sky. Meteor showers, eclipses, occultations, and perfect observation opportunities.",
+        "eventListTitle": "Events This Month",
+        "noEventsForFilter": "No events match this filter for the selected month.",
+        "intensityLabel": "Observation Quality",
+        "previousMonth": "Previous month",
+        "nextMonth": "Next month",
+        "close": "Close",
         "viewModes": {
             "list": "List View",
             "grid": "Grid View"
@@ -69,12 +106,9 @@
             "meteor": "Meteor Showers",
             "eclipse": "Eclipses",
             "conjunction": "Conjunctions",
-            "satellite": "Satellites & ISS"
-        },
-        "months": {
-            "august": "August 2026",
-            "september": "September 2026",
-            "october": "October 2026"
+            "satellite": "Satellites & ISS",
+            "moon": "Moon Events",
+            "other": "Other"
         }
     },
     "Planetarium": {

@@ -1,0 +1,141 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.backRow {
+    margin-bottom: 1.5rem;
+}
+
+.backLink {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: minmax(320px, 460px) 1fr;
+    gap: 2rem;
+    align-items: stretch;
+    margin-bottom: 3rem;
+}
+
+.imageWrap {
+    position: relative;
+    min-height: 420px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+}
+
+.heroImage {
+    object-fit: cover;
+}
+
+.heroContent {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.kicker {
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+}
+
+.title {
+    font-size: 3rem;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+}
+
+.description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.actions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.primaryAction,
+.secondaryAction {
+    padding: 0.95rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.primaryAction {
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+    color: white;
+}
+
+.secondaryAction {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--glass-border);
+}
+
+.factsSection {
+    margin-top: 2rem;
+}
+
+.sectionHeader {
+    margin-bottom: 1.5rem;
+}
+
+.sectionHeader h2 {
+    font-size: 1.8rem;
+}
+
+.factGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.factCard {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.2rem;
+}
+
+.factLabel {
+    display: block;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.factValue {
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .title {
+        font-size: 2.3rem;
+    }
+
+    .imageWrap {
+        min-height: 320px;
+    }
+}

@@ -1,6 +1,6 @@
 {
     "Navigation": {
-        "home": "Günün Görseli",
+        "home": "Ana Sayfa",
         "calendar": "Takvim",
         "planetarium": "Harita",
         "encyclopedia": "Ansiklopedi",
@@ -12,7 +12,7 @@
         "subtitle": "Amatör astronomlar için nihai gözlem takvimi. Yaklaşan meteor yağmurları, gezegen sıralanmaları, uzay istasyonu geçişleri ve atmosferik şartlar bir arada.",
         "buttonTonight": "Bu Gece Neler Var?",
         "buttonPlan": "Gözlem Planla",
-        "apodLoading": "NASA APOD Görseli Yükleniyor...",
+        "apodLoading": "NASA APOD görseli yükleniyor...",
         "apodTag": "Günün Görseli",
         "upcomingEvents": "Yaklaşan",
         "upcomingEventsStrong": "Gökyüzü Olayları",
@@ -21,8 +21,35 @@
         "observationConditionsStrong": "Gözlem Şartları",
         "moonPhase": "Ay Evresi",
         "cloudCover": "Bulutluluk",
-        "seeing": "Seeing (Türbülans)",
-        "lightPollution": "Işık Kirliliği"
+        "seeing": "Atmosfer Kararlılığı",
+        "lightPollution": "Işık Kirliliği",
+        "observation": {
+            "loading": "Canlı gözlem verisi yükleniyor...",
+            "refresh": "Yenile",
+            "useMyLocation": "Konumumu Kullan",
+            "usingDefaultLocation": "Varsayılan konum kullanılıyor: İstanbul",
+            "usingCurrentLocation": "Mevcut konumunuz kullanılıyor",
+            "visibility": "Görüş Mesafesi",
+            "darknessWindow": "Karanlık Penceresi",
+            "hours": "saat",
+            "unavailable": "Kullanılamıyor",
+            "quality": {
+                "excellent": "Harika",
+                "good": "İyi",
+                "fair": "Orta",
+                "poor": "Zayıf"
+            },
+            "moonPhases": {
+                "newMoon": "Yeni Ay",
+                "waxingCrescent": "Büyüyen Hilal",
+                "firstQuarter": "İlk Dördün",
+                "waxingGibbous": "Büyüyen Şişkin Ay",
+                "fullMoon": "Dolunay",
+                "waningGibbous": "Küçülen Şişkin Ay",
+                "lastQuarter": "Son Dördün",
+                "waningCrescent": "Küçülen Hilal"
+            }
+        }
     },
     "Encyclopedia": {
         "title": "Kozmik",
@@ -43,11 +70,15 @@
         },
         "bodyDetails": {
             "type": "Tür",
-            "distance": "Güneş'e Uzaklık",
+            "distance": "Uzaklık",
             "radius": "Yarıçap",
             "gravity": "Yerçekimi",
             "discoverer": "Kaşif",
-            "readMore": "Wikipedia'da okumaya devam et"
+            "readMore": "Wikipedia'da okumaya devam et",
+            "viewDetails": "Detayları Gör",
+            "backToList": "Ansiklopediye Dön",
+            "overview": "Genel Bakış",
+            "quickFacts": "Hızlı Bilgiler"
         }
     },
     "Footer": {
@@ -60,6 +91,12 @@
         "title": "Astronomik",
         "titleStrong": "Takvim",
         "subtitle": "Gökyüzündeki en önemli olayları kaçırmayın. Meteor yağmurları, tutulmalar, örtülmeler ve mükemmel gözlem fırsatları.",
+        "eventListTitle": "Bu Ayın Olayları",
+        "noEventsForFilter": "Seçili ay ve filtre için olay bulunamadı.",
+        "intensityLabel": "Gözlem Şansı",
+        "previousMonth": "Önceki ay",
+        "nextMonth": "Sonraki ay",
+        "close": "Kapat",
         "viewModes": {
             "list": "Liste Görünümü",
             "grid": "Izgara Görünümü"
@@ -69,12 +106,9 @@
             "meteor": "Meteor Yağmurları",
             "eclipse": "Tutulmalar",
             "conjunction": "Yakınlaşmalar",
-            "satellite": "Uydular ve ISS"
-        },
-        "months": {
-            "august": "Ağustos 2026",
-            "september": "Eylül 2026",
-            "october": "Ekim 2026"
+            "satellite": "Uydular ve ISS",
+            "moon": "Ay Olayları",
+            "other": "Diğer"
         }
     },
     "Planetarium": {

@@ -7,6 +7,29 @@
     width: 100%;
 }
 
+.filterBar {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.filterBtn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    border-radius: 999px;
+    padding: 0.6rem 1rem;
+    font: inherit;
+    cursor: pointer;
+}
+
+.active {
+    color: white;
+    border-color: rgba(0, 240, 255, 0.45);
+    background: rgba(0, 240, 255, 0.12);
+}
+
 .calendarHeader {
     display: flex;
     justify-content: space-between;
@@ -18,6 +41,7 @@
     font-size: 2rem;
     color: var(--text-primary);
     font-weight: 700;
+    text-transform: capitalize;
 }
 
 .navBtn {
@@ -28,7 +52,7 @@
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1rem;
     transition: all 0.2s ease;
 }
 
@@ -107,12 +131,19 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    border: none;
     border-left: 3px solid transparent;
-    transition: all 0.2s ease;
+    color: white;
+    text-align: left;
 }
 
 .eventDot:hover {
     filter: brightness(1.2);
+}
+
+.eventName {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .meteor {
@@ -139,13 +170,42 @@
     border-left-color: #bc6c25;
 }
 
-/* Modal Styles */
+.eventListSection {
+    margin-top: 2rem;
+}
+
+.eventListHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.eventListHeader h3 {
+    font-size: 1.25rem;
+}
+
+.eventCount {
+    color: var(--text-secondary);
+}
+
+.eventList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.emptyState {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1rem;
+    color: var(--text-secondary);
+}
+
 .modalOverlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(5px);
     display: flex;
@@ -163,19 +223,6 @@
     max-width: 500px;
     position: relative;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    animation: scaleIn 0.3s ease-out;
-}
-
-@keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
 }
 
 .closeBtn {
@@ -185,13 +232,8 @@
     background: transparent;
     border: none;
     color: var(--text-muted);
-    font-size: 2rem;
+    font-size: 1.25rem;
     cursor: pointer;
-    transition: color 0.2s;
-}
-
-.closeBtn:hover {
-    color: white;
 }
 
 .modalContent h3 {
@@ -219,6 +261,12 @@
     color: var(--text-primary);
 }
 
+.modalMeta {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
 .badge {
     display: inline-block;
     padding: 4px 10px;
@@ -226,7 +274,6 @@
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .badge.meteor {
@@ -257,4 +304,30 @@
 .badge.other {
     background: rgba(188, 108, 37, 0.1);
     color: #bc6c25;
+}
+
+@media (max-width: 900px) {
+    .grid {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .calendarWrapper {
+        padding: 1.25rem;
+    }
+
+    .currentMonth {
+        font-size: 1.4rem;
+    }
+
+    .grid,
+    .weekdays {
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+
+    .day {
+        min-height: 78px;
+        padding: 6px;
+    }
 }

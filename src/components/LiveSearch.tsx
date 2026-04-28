@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import BodyCard from './BodyCard';
 import styles from './LiveSearch.module.css';
-import { WikiSummaryResponse } from '@/services/wikipedia';
+import type { WikiSummaryResponse } from '@/services/wikipedia';
 import { CelestialBody } from '@/types/bodies';
 
 type BodyFilter = 'all' | 'planets' | 'moons' | 'dwarf_planets' | 'galaxies';
@@ -61,6 +61,7 @@ export default function LiveSearch({ initialBodies, locale }: LiveSearchProps) {
                     image: data.thumbnail?.source || data.originalimage?.source || 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800',
                     description: data.extract || t('searchNoResult'),
                     articleUrl: data.content_urls?.desktop?.page,
+                    wikiTitle: data.title,
                     group: 'search'
                 }]);
             } else {
@@ -112,11 +113,12 @@ export default function LiveSearch({ initialBodies, locale }: LiveSearchProps) {
                     filteredResults.map((body) => (
                         <BodyCard
                             key={body.id}
+                            id={body.id}
                             name={body.name}
                             type={body.type}
                             image={body.image}
                             description={body.description}
-                            articleUrl={body.articleUrl}
+                            wikiTitle={body.wikiTitle}
                         />
                     ))
                 ) : (

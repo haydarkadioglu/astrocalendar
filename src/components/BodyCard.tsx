@@ -1,17 +1,21 @@
 import Image from 'next/image';
 import styles from './BodyCard.module.css';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 
 interface BodyProps {
+    id?: string;
     name: string;
     type: string;
     image: string;
     description: string;
     articleUrl?: string;
+    wikiTitle: string;
 }
 
-export default function BodyCard({ name, type, image, description, articleUrl }: BodyProps) {
+export default function BodyCard({ id, name, type, image, description, wikiTitle }: BodyProps) {
     const t = useTranslations('Encyclopedia');
+    const slug = id || wikiTitle.toLowerCase().replace(/\s+/g, '-');
 
     return (
         <div className={`glass-panel ${styles.card}`}>
@@ -29,16 +33,12 @@ export default function BodyCard({ name, type, image, description, articleUrl }:
             <div className={styles.content}>
                 <h3 className={styles.name}>{name}</h3>
                 <p className={styles.description}>{description}</p>
-                {articleUrl ? (
-                    <a
-                        className={styles.exploreBtn}
-                        href={articleUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        {t('bodyDetails.readMore')}
-                    </a>
-                ) : null}
+                <Link
+                    className={styles.exploreBtn}
+                    href={`/bodies/${slug}?title=${encodeURIComponent(wikiTitle)}`}
+                >
+                    {t('bodyDetails.viewDetails')}
+                </Link>
             </div>
         </div>
     );

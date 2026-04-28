@@ -1,23 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import LiveSearch from '@/components/LiveSearch';
+import { BASE_BODIES } from '@/data/bodies';
 import { getWikiSummary } from '@/services/wikipedia';
 import { CelestialBody } from '@/types/bodies';
 import styles from './page.module.css';
-
-const BASE_BODIES = [
-    { id: 'sun', wikiTitleTr: 'Güneş', wikiTitleEn: 'Sun', typeEn: 'Star', typeTr: 'Yıldız', group: 'stars' },
-    { id: 'mercury', wikiTitleTr: 'Merkür', wikiTitleEn: 'Mercury (planet)', typeEn: 'Planet', typeTr: 'Gezegen', group: 'planets' },
-    { id: 'venus', wikiTitleTr: 'Venüs', wikiTitleEn: 'Venus', typeEn: 'Planet', typeTr: 'Gezegen', group: 'planets' },
-    { id: 'earth', wikiTitleTr: 'Dünya', wikiTitleEn: 'Earth', typeEn: 'Planet', typeTr: 'Gezegen', group: 'planets' },
-    { id: 'mars', wikiTitleTr: 'Mars', wikiTitleEn: 'Mars', typeEn: 'Planet', typeTr: 'Gezegen', group: 'planets' },
-    { id: 'jupiter', wikiTitleTr: 'Jüpiter', wikiTitleEn: 'Jupiter', typeEn: 'Planet', typeTr: 'Gezegen', group: 'planets' },
-    { id: 'saturn', wikiTitleTr: 'Satürn', wikiTitleEn: 'Saturn', typeEn: 'Planet', typeTr: 'Gezegen', group: 'planets' },
-    { id: 'uranus', wikiTitleTr: 'Uranüs', wikiTitleEn: 'Uranus', typeEn: 'Planet', typeTr: 'Gezegen', group: 'planets' },
-    { id: 'neptune', wikiTitleTr: 'Neptün', wikiTitleEn: 'Neptune', typeEn: 'Planet', typeTr: 'Gezegen', group: 'planets' },
-    { id: 'moon', wikiTitleTr: 'Ay', wikiTitleEn: 'Moon', typeEn: 'Moon', typeTr: 'Uydu', group: 'moons' },
-    { id: 'pluto', wikiTitleTr: 'Plüton', wikiTitleEn: 'Pluto', typeEn: 'Dwarf Planet', typeTr: 'Cüce Gezegen', group: 'dwarf_planets' },
-    { id: 'andromeda', wikiTitleTr: 'Andromeda_Galaksisi', wikiTitleEn: 'Andromeda_Galaxy', typeEn: 'Spiral Galaxy', typeTr: 'Sarmal Galaksi', group: 'galaxies' }
-] as const;
 
 export default async function BodiesPage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
@@ -34,8 +20,9 @@ export default async function BodiesPage({ params }: { params: Promise<{ locale:
                 name: wikiData?.title || pageName.replace(/_/g, ' '),
                 type,
                 image: wikiData?.thumbnail?.source || wikiData?.originalimage?.source || 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800',
-                description: wikiData?.extract || 'Açıklama yüklenemedi / No description available.',
+                description: wikiData?.extract || 'Description is temporarily unavailable.',
                 articleUrl: wikiData?.content_urls?.desktop?.page,
+                wikiTitle: wikiData?.title || pageName.replace(/_/g, ' '),
                 group: body.group
             };
         })

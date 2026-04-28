@@ -69,8 +69,10 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 title={locale === 'tr' ? event.titleTr : event.titleEn}
                 date={locale === 'tr' ? event.dateTr : event.dateEn}
                 category={locale === 'tr' ? event.categoryTr : event.categoryEn}
+                categoryType={event.category}
                 description={locale === 'tr' ? event.descriptionTr : event.descriptionEn}
                 intensity={locale === 'tr' ? event.intensityTr : event.intensityEn}
+                intensityLabel={locale === 'tr' ? 'Gozlem Sansi' : 'Observation Quality'}
               />
             ))
           ) : (

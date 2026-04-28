@@ -13,5 +13,6 @@ export interface CelestialBody {
     image: string;
     description: string;
     articleUrl?: string;
+    wikiTitle: string;
     group: BodyGroup;
 }

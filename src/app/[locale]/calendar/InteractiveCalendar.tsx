@@ -1,40 +1,52 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import EventCard from '@/components/EventCard';
 import styles from './InteractiveCalendar.module.css';
-import { AstronomyEvent } from '@/types/astronomy';
+import { AstronomyCategory, AstronomyEvent } from '@/types/astronomy';
 
 interface InteractiveCalendarProps {
     events: AstronomyEvent[];
     locale: string;
 }
 
+type CalendarFilter = 'all' | AstronomyCategory;
+
+function getEventDayTokens(dateEn: string) {
+    const datePart = dateEn.split(' ')[1];
+    if (!datePart) {
+        return [];
+    }
+
+    return datePart.split('/');
+}
+
 export default function InteractiveCalendar({ events, locale }: InteractiveCalendarProps) {
+    const t = useTranslations('Calendar');
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedEvent, setSelectedEvent] = useState<AstronomyEvent | null>(null);
+    const [activeFilter, setActiveFilter] = useState<CalendarFilter>('all');
 
     const year = currentDate.getFullYear();
-    const month = currentDate.getMonth(); // 0-11
-
+    const month = currentDate.getMonth();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const firstDayOfMonth = new Date(year, month, 1).getDay();
-    // JS getDay() returns 0 for Sunday, 1 for Monday. Let's adjust to make Monday = 0
     const startOffset = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
 
-    const monthNames = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-    ];
+    const monthLabel = new Intl.DateTimeFormat(locale, {
+        month: 'long',
+        year: 'numeric'
+    }).format(currentDate);
 
-    // Simple filter to get events for current month/year
-    const currentMonthEvents = events.filter(e => {
-        // e.dateEn is like "Jan 3" or "Mar 19/20"
-        // But what if the event is actually from the original scraped year?
-        // Relying on month string matching is safer for this specific timeanddate format
-        const evMonthStr = e.dateEn.split(' ')[0]; // "Jan"
-        const monthMatch = new Date(`${evMonthStr} 1 2000`).getMonth() === month;
-        return monthMatch;
-    });
+    const currentMonthEvents = useMemo(() => {
+        return events.filter((event) => {
+            const evMonthStr = event.dateEn.split(' ')[0];
+            const eventMonth = new Date(`${evMonthStr} 1 2000`).getMonth();
+            const filterMatch = activeFilter === 'all' || event.category === activeFilter;
+            return eventMonth === month && filterMatch;
+        });
+    }, [activeFilter, events, month]);
 
     const nextMonth = () => setCurrentDate(new Date(year, month + 1, 1));
     const prevMonth = () => setCurrentDate(new Date(year, month - 1, 1));
@@ -42,65 +54,102 @@ export default function InteractiveCalendar({ events, locale }: InteractiveCalen
     const renderDays = () => {
         const grid = [];
 
-        // Empty cells before the 1st
         for (let i = 0; i < startOffset; i++) {
             grid.push(<div key={`empty-${i}`} className={styles.emptyDay}></div>);
         }
 
         for (let day = 1; day <= daysInMonth; day++) {
-            // Check if there are events on this day
-            const dayEvents = currentMonthEvents.filter(e => {
-                const datePart = e.dateEn.split(' ')[1]; // e.g. "3" or "19/20"
-                if (!datePart) return false;
-                const ranges = datePart.split('/'); // ["19", "20"]
-                return ranges.includes(day.toString());
-            });
-
-            const isToday = day === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear();
+            const dayEvents = currentMonthEvents.filter((event) => getEventDayTokens(event.dateEn).includes(day.toString()));
+            const now = new Date();
+            const isToday = day === now.getDate() && month === now.getMonth() && year === now.getFullYear();
 
             grid.push(
                 <div key={day} className={`${styles.day} ${isToday ? styles.today : ''}`}>
                     <span className={styles.dayNumber}>{day}</span>
                     <div className={styles.dayEvents}>
-                        {dayEvents.map(ev => (
-                            <div
-                                key={ev.id}
-                                className={`${styles.eventDot} ${styles[ev.category]}`}
-                                onClick={() => setSelectedEvent(ev)}
-                                title={locale === 'tr' ? ev.titleTr : ev.titleEn}
+                        {dayEvents.map((event) => (
+                            <button
+                                key={event.id}
+                                type="button"
+                                className={`${styles.eventDot} ${styles[event.category]}`}
+                                onClick={() => setSelectedEvent(event)}
+                                title={locale === 'tr' ? event.titleTr : event.titleEn}
                             >
-                                <span className={styles.eventName}>{locale === 'tr' ? ev.titleTr : ev.titleEn}</span>
-                            </div>
+                                <span className={styles.eventName}>{locale === 'tr' ? event.titleTr : event.titleEn}</span>
+                            </button>
                         ))}
                     </div>
                 </div>
             );
         }
+
         return grid;
     };
 
     return (
         <div className={styles.calendarWrapper}>
+            <div className={styles.filterBar}>
+                {(['all', 'meteor', 'eclipse', 'conjunction', 'satellite', 'moon', 'other'] as const).map((filter) => (
+                    <button
+                        key={filter}
+                        type="button"
+                        className={`${styles.filterBtn} ${activeFilter === filter ? styles.active : ''}`}
+                        onClick={() => setActiveFilter(filter)}
+                    >
+                        {t(`filters.${filter}`)}
+                    </button>
+                ))}
+            </div>
+
             <div className={styles.calendarHeader}>
-                <button onClick={prevMonth} className={styles.navBtn}>❮</button>
-                <h2 className={styles.currentMonth}>{monthNames[month]} {year}</h2>
-                <button onClick={nextMonth} className={styles.navBtn}>❯</button>
+                <button type="button" onClick={prevMonth} className={styles.navBtn} aria-label={t('previousMonth')}>{'<'}</button>
+                <h2 className={styles.currentMonth}>{monthLabel}</h2>
+                <button type="button" onClick={nextMonth} className={styles.navBtn} aria-label={t('nextMonth')}>{'>'}</button>
             </div>
 
             <div className={styles.weekdays}>
-                {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => (
-                    <div key={day} className={styles.weekday}>{day}</div>
-                ))}
+                {Array.from({ length: 7 }).map((_, index) => {
+                    const weekdayDate = new Date(2024, 0, index + 1);
+                    return (
+                        <div key={index} className={styles.weekday}>
+                            {new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(weekdayDate)}
+                        </div>
+                    );
+                })}
             </div>
 
             <div className={styles.grid}>
                 {renderDays()}
             </div>
 
-            {selectedEvent && (
+            <section className={styles.eventListSection}>
+                <div className={styles.eventListHeader}>
+                    <h3>{t('eventListTitle')}</h3>
+                    <span className={styles.eventCount}>{currentMonthEvents.length}</span>
+                </div>
+
+                <div className={styles.eventList}>
+                    {currentMonthEvents.length > 0 ? currentMonthEvents.map((event) => (
+                        <EventCard
+                            key={event.id}
+                            title={locale === 'tr' ? event.titleTr : event.titleEn}
+                            date={locale === 'tr' ? event.dateTr : event.dateEn}
+                            category={locale === 'tr' ? event.categoryTr : event.categoryEn}
+                            categoryType={event.category}
+                            description={locale === 'tr' ? event.descriptionTr : event.descriptionEn}
+                            intensity={locale === 'tr' ? event.intensityTr : event.intensityEn}
+                            intensityLabel={t('intensityLabel')}
+                        />
+                    )) : (
+                        <div className={styles.emptyState}>{t('noEventsForFilter')}</div>
+                    )}
+                </div>
+            </section>
+
+            {selectedEvent ? (
                 <div className={styles.modalOverlay} onClick={() => setSelectedEvent(null)}>
-                    <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
-                        <button className={styles.closeBtn} onClick={() => setSelectedEvent(null)}>×</button>
+                    <div className={styles.modalContent} onClick={(event) => event.stopPropagation()}>
+                        <button type="button" className={styles.closeBtn} onClick={() => setSelectedEvent(null)} aria-label={t('close')}>x</button>
                         <span className={`${styles.badge} ${styles[selectedEvent.category]}`}>
                             {locale === 'tr' ? selectedEvent.categoryTr : selectedEvent.categoryEn}
                         </span>
@@ -108,12 +157,12 @@ export default function InteractiveCalendar({ events, locale }: InteractiveCalen
                         <p className={styles.modalDate}>{locale === 'tr' ? selectedEvent.dateTr : selectedEvent.dateEn} {year}</p>
                         <hr className={styles.divider} />
                         <p className={styles.modalDesc}>{locale === 'tr' ? selectedEvent.descriptionTr : selectedEvent.descriptionEn}</p>
-                        <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-                            Intensity: {locale === 'tr' ? selectedEvent.intensityTr : selectedEvent.intensityEn}
+                        <p className={styles.modalMeta}>
+                            {t('intensityLabel')}: {locale === 'tr' ? selectedEvent.intensityTr : selectedEvent.intensityEn}
                         </p>
                     </div>
                 </div>
-            )}
+            ) : null}
         </div>
     );
 }
