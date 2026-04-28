@@ -1,23 +1,16 @@
 import * as cheerio from 'cheerio';
+import { AstronomyCategory, AstronomyEvent } from '@/types/astronomy';
 
-export interface AstronomyEvent {
-    id: string;
-    titleEn: string;
-    titleTr: string;
-    dateEn: string;
-    dateTr: string;
-    category: 'meteor' | 'eclipse' | 'conjunction' | 'satellite' | 'moon' | 'other';
+interface EventCategoryInfo {
+    category: AstronomyCategory;
     categoryEn: string;
     categoryTr: string;
-    descriptionEn: string;
-    descriptionTr: string;
     intensityEn: string;
     intensityTr: string;
-    rawDate: number;
 }
 
 // Simple categorization helper
-function categorizeEvent(title: string): Partial<AstronomyEvent> {
+function categorizeEvent(title: string): EventCategoryInfo {
     const t = title.toLowerCase();
 
     if (t.includes('meteor')) {
@@ -126,7 +119,7 @@ export async function fetchAstronomicalEvents(): Promise<AstronomyEvent[]> {
                     descriptionEn: nextP,
                     descriptionTr: nextP,
                     rawDate: eventDate.getTime(),
-                    ...(categoryInfo as any)
+                    ...categoryInfo
                 });
             }
         });

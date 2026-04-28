@@ -43,7 +43,8 @@
 }
 
 .filterBtn:hover,
-.filterBtn.active {
+.filterBtn.active,
+.active {
     background: rgba(0, 240, 255, 0.1);
     border-color: var(--accent-blue);
     color: white;

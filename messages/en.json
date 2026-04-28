@@ -29,6 +29,11 @@
         "titleStrong": "Encyclopedia",
         "subtitle": "Immerse yourself in the depths of the universe. Explore planets, dwarf planets, moons, and distant galaxies.",
         "searchPlaceholder": "Search for a celestial body...",
+        "searchButton": "Search",
+        "searchResultType": "Search Result",
+        "searchError": "Something went wrong during search or no matching body was found.",
+        "searchNoResult": "No result found.",
+        "emptyState": "There are no celestial bodies to display for this filter.",
         "categories": {
             "all": "All",
             "planets": "Planets",
@@ -89,6 +94,7 @@
         "title": "Space",
         "titleStrong": "Missions Archive",
         "subtitle": "A historical timeline of humanity's greatest achievements in space exploration. From the first steps on the Moon to the deepest corners of the universe.",
+        "emptyState": "No missions matched this filter.",
         "filters": {
             "all": "All Missions",
             "crewed": "Crewed",

@@ -2,8 +2,6 @@
  * Service to interact with the Wikipedia REST API for fetching celestial body information.
  */
 
-const WIKI_API_BASE = 'https://tr.wikipedia.org/api/rest_v1/page/summary';
-
 export interface WikiSummaryResponse {
     title: string;
     extract: string;

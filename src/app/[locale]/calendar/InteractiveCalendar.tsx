@@ -1,9 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
 import styles from './InteractiveCalendar.module.css';
-import { AstronomyEvent } from '@/services/astronomy';
+import { AstronomyEvent } from '@/types/astronomy';
 
 interface InteractiveCalendarProps {
     events: AstronomyEvent[];
@@ -11,7 +10,6 @@ interface InteractiveCalendarProps {
 }
 
 export default function InteractiveCalendar({ events, locale }: InteractiveCalendarProps) {
-    const t = useTranslations('Calendar');
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedEvent, setSelectedEvent] = useState<AstronomyEvent | null>(null);
 
@@ -31,8 +29,6 @@ export default function InteractiveCalendar({ events, locale }: InteractiveCalen
     // Simple filter to get events for current month/year
     const currentMonthEvents = events.filter(e => {
         // e.dateEn is like "Jan 3" or "Mar 19/20"
-        const cleanDate = e.dateEn.split('/')[0].trim();
-        const eventDate = new Date(`${cleanDate} ${year}`);
         // But what if the event is actually from the original scraped year?
         // Relying on month string matching is safer for this specific timeanddate format
         const evMonthStr = e.dateEn.split(' ')[0]; // "Jan"

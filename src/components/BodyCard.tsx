@@ -1,31 +1,44 @@
 import Image from 'next/image';
 import styles from './BodyCard.module.css';
+import { useTranslations } from 'next-intl';
 
 interface BodyProps {
-    id: string;
     name: string;
     type: string;
     image: string;
     description: string;
+    articleUrl?: string;
 }
 
-export default function BodyCard({ id, name, type, image, description }: BodyProps) {
+export default function BodyCard({ name, type, image, description, articleUrl }: BodyProps) {
+    const t = useTranslations('Encyclopedia');
+
     return (
         <div className={`glass-panel ${styles.card}`}>
             <div className={styles.imageContainer}>
-                {/* Using standard img for now to easily handle external URLs without Next.js config overhead */}
-                <img
+                <Image
                     src={image}
                     alt={name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className={styles.image}
-                    loading="lazy"
+                    unoptimized
                 />
                 <div className={styles.badge}>{type}</div>
             </div>
             <div className={styles.content}>
                 <h3 className={styles.name}>{name}</h3>
                 <p className={styles.description}>{description}</p>
-                <button className={styles.exploreBtn}>Makaleyi Oku</button>
+                {articleUrl ? (
+                    <a
+                        className={styles.exploreBtn}
+                        href={articleUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        {t('bodyDetails.readMore')}
+                    </a>
+                ) : null}
             </div>
         </div>
     );

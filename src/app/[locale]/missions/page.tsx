@@ -1,8 +1,8 @@
 import { getTranslations } from 'next-intl/server';
-import styles from './page.module.css';
 import { fetchSpaceXLaunches } from '@/services/spacex';
+import MissionTimeline, { Mission } from './MissionTimeline';
+import styles from './page.module.css';
 
-// Static Data for Timeline (Server-Side)
 const MISSIONS_DATA = [
     {
         id: 'artemis1',
@@ -11,9 +11,9 @@ const MISSIONS_DATA = [
         dateEn: 'Nov 16, 2022',
         dateTr: '16 Kas 2022',
         status: 'completed',
-        type: 'uncrewed',
+        type: 'robotic',
         descEn: 'The first flight of the Space Launch System (SLS) and the Orion spacecraft. It paved the way for future human exploration of the Moon.',
-        descTr: 'Uzay Fırlatma Sistemi (SLS) ve Orion uzay aracının ilk uçuşu. Ay\'ın gelecekteki insanlı keşfi için zemin hazırladı.',
+        descTr: 'Uzay Fırlatma Sistemi (SLS) ve Orion uzay aracının ilk uçuşu. Ay’ın gelecekteki insanlı keşfi için zemin hazırladı.',
         agency: 'NASA / ESA',
         destinationEn: 'Lunar Orbit',
         destinationTr: 'Ay Yörüngesi'
@@ -41,7 +41,7 @@ const MISSIONS_DATA = [
         status: 'active',
         type: 'robotic',
         descEn: 'A rover designed to explore the Jezero crater on Mars as part of NASA\'s Mars 2020 mission, carrying the Ingenuity helicopter.',
-        descTr: 'NASA\'nın Mars 2020 görevinin bir parçası olarak Jezero kraterini keşfetmek üzere tasarlanmış, beraberinde Ingenuity helikopterini taşıyan uzay aracı.',
+        descTr: 'NASA’nın Mars 2020 görevinin bir parçası olarak Jezero kraterini keşfetmek üzere tasarlanmış, beraberinde Ingenuity helikopterini taşıyan uzay aracı.',
         agency: 'NASA',
         destinationEn: 'Mars',
         destinationTr: 'Mars'
@@ -69,30 +69,26 @@ const MISSIONS_DATA = [
         status: 'completed',
         type: 'crewed',
         descEn: 'The historic spaceflight that first landed humans on the Moon. Commanders Neil Armstrong and Buzz Aldrin formed the American crew.',
-        descTr: 'İnsanları Ay\'a ilk indiren tarihi uzay uçuşu. Komutan Neil Armstrong ve Buzz Aldrin Amerikan mürettebatını oluşturdu.',
+        descTr: 'İnsanları Ay’a ilk indiren tarihi uzay uçuşu. Komutan Neil Armstrong ve Buzz Aldrin Amerikan mürettebatını oluşturdu.',
         agency: 'NASA',
         destinationEn: 'The Moon',
         destinationTr: 'Ay'
     }
-];
+] as const;
 
 export default async function MissionsPage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
-    // We await translations in Next 15 Server components
     const t = await getTranslations({ locale, namespace: 'Missions' });
-
-    // Fetch Live SpaceX Launches
     const spacexLaunches = await fetchSpaceXLaunches();
 
-    // Map SpaceX data to match timeline format
-    const mappedSpaceX = spacexLaunches.map(launch => ({
+    const mappedSpaceX: Mission[] = spacexLaunches.map((launch) => ({
         id: launch.id,
         titleEn: launch.name,
         titleTr: launch.name,
         dateEn: new Date(launch.date_utc).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
         dateTr: new Date(launch.date_utc).toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' }),
         rawDate: new Date(launch.date_utc).getTime(),
-        status: launch.upcoming ? 'planned' : (launch.success ? 'completed' : 'active'), // using active as fallback for failed/unknown
+        status: launch.upcoming ? 'planned' : (launch.success ? 'completed' : 'active'),
         type: 'robotic',
         descEn: launch.details || (launch.upcoming ? 'Upcoming SpaceX mission.' : 'A SpaceX orbital launch mission.'),
         descTr: launch.details ? `(İngilizce) ${launch.details}` : (launch.upcoming ? 'Planlanan SpaceX fırlatması.' : 'SpaceX yörünge fırlatma görevi.'),
@@ -102,14 +98,12 @@ export default async function MissionsPage({ params }: { params: Promise<{ local
         patch: launch.links?.patch?.small
     }));
 
-    // Map static missions with rawDate for sorting
-    const mappedStatic = MISSIONS_DATA.map(m => ({
-        ...m,
-        rawDate: new Date(m.dateEn).getTime(),
+    const mappedStatic: Mission[] = MISSIONS_DATA.map((mission) => ({
+        ...mission,
+        rawDate: new Date(mission.dateEn).getTime(),
         patch: null
     }));
 
-    // Combine and sort missions descending (newest first)
     const allMissions = [...mappedStatic, ...mappedSpaceX].sort((a, b) => b.rawDate - a.rawDate);
 
     return (
@@ -119,51 +113,9 @@ export default async function MissionsPage({ params }: { params: Promise<{ local
                     {t('title')} <span className="text-gradient">{t('titleStrong')}</span>
                 </h1>
                 <p className={styles.subtitle}>{t('subtitle')}</p>
-
-                <div className={styles.filters}>
-                    <button className={`${styles.filterBtn} ${styles.active}`}>{t('filters.all')}</button>
-                    <button className={styles.filterBtn}>{t('filters.crewed')}</button>
-                    <button className={styles.filterBtn}>{t('filters.robotic')}</button>
-                    <button className={styles.filterBtn}>{t('filters.telescope')}</button>
-                </div>
             </header>
 
-            <div className={styles.timeline}>
-                {allMissions.map((mission) => (
-                    <div key={mission.id} className={styles.timelineItem}>
-                        <div className={styles.timelineDot}></div>
-                        <div className={styles.timelineCard}>
-                            <div className={styles.cardHeader}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                    {mission.patch && (
-                                        <img src={mission.patch} alt="Mission Patch" style={{ width: '45px', height: '45px', objectFit: 'contain' }} />
-                                    )}
-                                    <div>
-                                        <h3 className={styles.cardTitle}>{locale === 'en' ? mission.titleEn : mission.titleTr}</h3>
-                                        <span className={styles.cardDate}>{locale === 'en' ? mission.dateEn : mission.dateTr}</span>
-                                    </div>
-                                </div>
-                                <span className={`${styles.statusBadge} ${mission.status === 'completed' ? styles.statusCompleted : styles.statusActive}`}>
-                                    {t(`status.${mission.status}`)}
-                                </span>
-                            </div>
-                            <p className={styles.cardDesc}>
-                                {locale === 'en' ? mission.descEn : mission.descTr}
-                            </p>
-                            <div className={styles.cardMeta}>
-                                <div className={styles.metaItem}>
-                                    <span className={styles.metaLabel}>{t('details.agency')}</span>
-                                    <span className={styles.metaValue}>{mission.agency}</span>
-                                </div>
-                                <div className={styles.metaItem}>
-                                    <span className={styles.metaLabel}>{t('details.destination')}</span>
-                                    <span className={styles.metaValue}>{locale === 'en' ? mission.destinationEn : mission.destinationTr}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
+            <MissionTimeline locale={locale} missions={allMissions} />
         </div>
     );
 }

@@ -29,6 +29,11 @@
         "titleStrong": "Ansiklopedi",
         "subtitle": "Evrenin derinliklerine dalın. Gezegenleri, cüce gezegenleri, uyduları ve uzak galaksileri keşfedin.",
         "searchPlaceholder": "Bir gök cismi arayın...",
+        "searchButton": "Ara",
+        "searchResultType": "Arama Sonucu",
+        "searchError": "Arama sırasında bir sorun oluştu veya eşleşen bir cisim bulunamadı.",
+        "searchNoResult": "Sonuç bulunamadı.",
+        "emptyState": "Bu filtre için gösterilecek gök cismi yok.",
         "categories": {
             "all": "Tümü",
             "planets": "Gezegenler",
@@ -89,6 +94,7 @@
         "title": "Uzay",
         "titleStrong": "Görevleri Arşivi",
         "subtitle": "İnsanlığın uzay keşfindeki en büyük başarılarının tarihi zaman çizelgesi. Ay'daki ilk adımlardan evrenin en derin köşelerine...",
+        "emptyState": "Bu filtreyle eşleşen görev bulunamadı.",
         "filters": {
             "all": "Tüm Görevler",
             "crewed": "İnsanlı",

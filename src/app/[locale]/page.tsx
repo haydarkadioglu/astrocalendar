@@ -1,10 +1,10 @@
-import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import styles from './page.module.css';
 import EventCard from '@/components/EventCard';
 import ObservationConditions from '@/components/ObservationConditions';
 import { fetchApod } from '@/services/nasa';
 import { fetchAstronomicalEvents } from '@/services/astronomy';
+import { Link } from '@/i18n/routing';
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -33,8 +33,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             {t('subtitle')}
           </p>
           <div className={styles.heroButtons}>
-            <button className={styles.primaryButton}>{t('buttonTonight')}</button>
-            <button className={styles.secondaryButton}>{t('buttonPlan')}</button>
+            <Link href="/calendar" className={styles.primaryButton}>{t('buttonTonight')}</Link>
+            <Link href="/planetarium" className={styles.secondaryButton}>{t('buttonPlan')}</Link>
           </div>
         </div>
 
@@ -58,7 +58,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2>{t('upcomingEvents')} <span className="text-gradient">{t('upcomingEventsStrong')}</span></h2>
-          <button className={styles.viewAll}>{t('viewAll')}</button>
+          <Link href="/calendar" className={styles.viewAll}>{t('viewAll')}</Link>
         </div>
 
         <div className={styles.grid}>
