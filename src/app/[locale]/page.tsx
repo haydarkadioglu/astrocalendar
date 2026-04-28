@@ -64,7 +64,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             <section className={styles.section}>
                 <div className={styles.sectionHeader}>
                     <h2>{t('nasaToday')} <span className="text-gradient">{t('nasaTodayStrong')}</span></h2>
-                    <a href="https://api.nasa.gov/" target="_blank" rel="noreferrer" className={styles.viewAll}>{t('exploreNasa')}</a>
                 </div>
 
                 <div className={styles.featureGrid}>
@@ -80,7 +79,14 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                                     : (item.thumbnail_url || apodImage);
                                 return (
                                     <div key={`${item.date}-${item.title}`} className={styles.galleryCard}>
-                                        <div className={styles.galleryThumb} style={{ backgroundImage: `url(${imageUrl})` }} />
+                                        <a
+                                            href={imageUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={styles.galleryThumb}
+                                            style={{ backgroundImage: `url(${imageUrl})` }}
+                                            title={item.title}
+                                        />
                                         <div className={styles.galleryBody}>
                                             <strong>{item.title}</strong>
                                             <span>{item.date}</span>
@@ -97,10 +103,14 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                             <span>{featuredEpic ? featuredEpic.date.slice(0, 10) : '--'}</span>
                         </div>
                         {featuredEpic ? (
-                            <>
-                                <div className={styles.epicHero} style={{ backgroundImage: `url(${featuredEpic.image})` }} />
-                                <p className={styles.panelCopy}>{clampText(featuredEpic.caption, 160)}</p>
-                            </>
+                            <a
+                                href={featuredEpic.image}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.epicHero}
+                                style={{ backgroundImage: `url(${featuredEpic.image})` }}
+                                title={featuredEpic.caption}
+                            />
                         ) : (
                             <p className={styles.panelCopy}>{t('emptyEpic')}</p>
                         )}

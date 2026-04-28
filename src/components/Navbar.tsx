@@ -21,6 +21,7 @@ export default function Navbar() {
                 <Link href="/bodies" className={styles.link}>{t('encyclopedia')}</Link>
                 <Link href="/missions" className={styles.link}>{t('archive')}</Link>
                 <Link href="/ecosystem" className={styles.link}>{t('ecosystem')}</Link>
+                <Link href="/wallpapers" className={styles.link}>{t('wallpapers') || 'Wallpapers'}</Link>
 
                 <div className={styles.switcherContainer}>
                     <LanguageSwitcher />

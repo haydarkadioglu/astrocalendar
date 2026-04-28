@@ -179,5 +179,10 @@
     "title": "AstroCalendar | The Ultimate Observation Guide for Amateur Astronomers",
     "description": "Discover sky events, space missions, and an encyclopedia for amateur astronomers.",
     "keywords": "astronomy, space, calendar, sky events, meteor shower, planets, NASA, APOD"
+  },
+  "Wallpapers": {
+    "title": "Space Wallpapers",
+    "download": "Download",
+    "wallpapers": "Wallpapers"
   }
 }

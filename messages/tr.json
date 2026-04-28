@@ -5,7 +5,8 @@
     "planetarium": "Harita",
     "encyclopedia": "Ansiklopedi",
     "archive": "Arşiv",
-    "ecosystem": "Ekosistem"
+    "ecosystem": "Ekosistem",
+    "wallpapers": "Duvar Kağıtları"
   },
   "HomePage": {
     "title": "Evrenin Sırlarını",
@@ -179,5 +180,10 @@
     "title": "AstroCalendar | Amatör Astronomi Rehberi",
     "description": "Gökyüzü olayları, uzay görevleri ve amatör astronomlar için nihai gözlem rehberi.",
     "keywords": "astronomi, uzay, takvim, gökyüzü olayları, meteor yağmuru, gezegenler, NASA, APOD"
-  }
+  },
+  "Wallpapers": {
+    "title": "Duvar Kağıtları",
+    "download": "İndir"
+  },
+  "wallpapers": "Duvar Kağıtları"
 }

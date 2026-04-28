@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { fetchSpaceXLaunches } from '@/services/spacex';
+import { fetchESA, fetchRoscosmos, fetchCNSA, fetchJAXA, fetchISRO } from '@/services/otheragencies';
 import MissionTimeline, { Mission } from './MissionTimeline';
 import styles from './page.module.css';
 
@@ -80,6 +81,11 @@ export default async function MissionsPage({ params }: { params: Promise<{ local
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'Missions' });
     const spacexLaunches = await fetchSpaceXLaunches();
+    const esaMissions = await fetchESA();
+    const roscosmosMissions = await fetchRoscosmos();
+    const cnsaMissions = await fetchCNSA();
+    const jaxaMissions = await fetchJAXA();
+    const isroMissions = await fetchISRO();
 
     const mappedSpaceX: Mission[] = spacexLaunches.map((launch) => ({
         id: launch.id,
@@ -104,7 +110,15 @@ export default async function MissionsPage({ params }: { params: Promise<{ local
         patch: null
     }));
 
-    const allMissions = [...mappedStatic, ...mappedSpaceX].sort((a, b) => b.rawDate - a.rawDate);
+    const allMissions = [
+        ...mappedStatic,
+        ...mappedSpaceX,
+        ...esaMissions,
+        ...roscosmosMissions,
+        ...cnsaMissions,
+        ...jaxaMissions,
+        ...isroMissions
+    ].sort((a, b) => b.rawDate - a.rawDate);
 
     return (
         <div className={styles.container}>
