@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'upload.wikimedia.org' },
       { protocol: 'https', hostname: 'apod.nasa.gov' },
       { protocol: 'https', hostname: 'www.nasa.gov' },
+      { protocol: 'https', hostname: 'epic.gsfc.nasa.gov' },
       { protocol: 'https', hostname: 'images2.imgbox.com' },
       { protocol: 'https', hostname: 'i.imgur.com' }
     ]

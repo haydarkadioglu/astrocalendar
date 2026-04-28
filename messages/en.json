@@ -1,154 +1,183 @@
 {
-    "Navigation": {
-        "home": "Home",
-        "calendar": "Calendar",
-        "planetarium": "Planetarium",
-        "encyclopedia": "Encyclopedia",
-        "archive": "Archive"
-    },
-    "HomePage": {
-        "title": "Discover the Secrets of the",
-        "titleStrong": "Universe",
-        "subtitle": "The ultimate observation calendar for amateur astronomers. Upcoming meteor showers, planetary alignments, space station passes, and atmospheric conditions all in one place.",
-        "buttonTonight": "What's Up Tonight?",
-        "buttonPlan": "Plan Observation",
-        "apodLoading": "Loading NASA APOD...",
-        "apodTag": "Picture of the Day",
-        "upcomingEvents": "Upcoming",
-        "upcomingEventsStrong": "Sky Events",
-        "viewAll": "View All",
-        "observationConditions": "Observation Conditions",
-        "observationConditionsStrong": "Tonight",
-        "moonPhase": "Moon Phase",
-        "cloudCover": "Cloud Cover",
-        "seeing": "Seeing",
-        "lightPollution": "Light Pollution",
-        "observation": {
-            "loading": "Loading live observing data...",
-            "refresh": "Refresh",
-            "useMyLocation": "Use My Location",
-            "usingDefaultLocation": "Using default location: Istanbul",
-            "usingCurrentLocation": "Using your current location",
-            "visibility": "Visibility",
-            "darknessWindow": "Darkness Window",
-            "hours": "hours",
-            "unavailable": "Unavailable",
-            "quality": {
-                "excellent": "Excellent",
-                "good": "Good",
-                "fair": "Fair",
-                "poor": "Poor"
-            },
-            "moonPhases": {
-                "newMoon": "New Moon",
-                "waxingCrescent": "Waxing Crescent",
-                "firstQuarter": "First Quarter",
-                "waxingGibbous": "Waxing Gibbous",
-                "fullMoon": "Full Moon",
-                "waningGibbous": "Waning Gibbous",
-                "lastQuarter": "Last Quarter",
-                "waningCrescent": "Waning Crescent"
-            }
-        }
-    },
-    "Encyclopedia": {
-        "title": "Cosmic",
-        "titleStrong": "Encyclopedia",
-        "subtitle": "Immerse yourself in the depths of the universe. Explore planets, dwarf planets, moons, and distant galaxies.",
-        "searchPlaceholder": "Search for a celestial body...",
-        "searchButton": "Search",
-        "searchResultType": "Search Result",
-        "searchError": "Something went wrong during search or no matching body was found.",
-        "searchNoResult": "No result found.",
-        "emptyState": "There are no celestial bodies to display for this filter.",
-        "categories": {
-            "all": "All",
-            "planets": "Planets",
-            "moons": "Moons",
-            "dwarf_planets": "Dwarf Planets",
-            "galaxies": "Galaxies"
-        },
-        "bodyDetails": {
-            "type": "Type",
-            "distance": "Distance",
-            "radius": "Radius",
-            "gravity": "Gravity",
-            "discoverer": "Discoverer",
-            "readMore": "Read more on Wikipedia",
-            "viewDetails": "View Details",
-            "backToList": "Back to Encyclopedia",
-            "overview": "Overview",
-            "quickFacts": "Quick Facts"
-        }
-    },
-    "Footer": {
-        "tagline": "The ultimate observation guide and space archive for amateur astronomers.",
-        "explore": "Explore",
-        "dataSources": "Data Sources",
-        "rights": "All rights reserved among the stars."
-    },
-    "Calendar": {
-        "title": "Astronomical",
-        "titleStrong": "Calendar",
-        "subtitle": "Don't miss the most important events in the sky. Meteor showers, eclipses, occultations, and perfect observation opportunities.",
-        "eventListTitle": "Events This Month",
-        "noEventsForFilter": "No events match this filter for the selected month.",
-        "intensityLabel": "Observation Quality",
-        "previousMonth": "Previous month",
-        "nextMonth": "Next month",
-        "close": "Close",
-        "viewModes": {
-            "list": "List View",
-            "grid": "Grid View"
-        },
-        "filters": {
-            "all": "All Events",
-            "meteor": "Meteor Showers",
-            "eclipse": "Eclipses",
-            "conjunction": "Conjunctions",
-            "satellite": "Satellites & ISS",
-            "moon": "Moon Events",
-            "other": "Other"
-        }
-    },
-    "Planetarium": {
-        "title": "Interactive",
-        "titleStrong": "Sky Map",
-        "subtitle": "Explore the night sky from any location. Drag to pan, scroll to zoom, and click on stars or planets to learn more.",
-        "locationBtn": "Use My Location",
-        "fullscreenBtn": "Full Screen",
-        "detecting": "Detecting location...",
-        "city": "City",
-        "cityPlaceholder": "Enter a city name...",
-        "setLocation": "Search",
-        "cityNotFound": "City could not be found.",
-        "error": "Could not access location. Please check your browser permissions."
-    },
-    "Missions": {
-        "title": "Space",
-        "titleStrong": "Missions Archive",
-        "subtitle": "A historical timeline of humanity's greatest achievements in space exploration. From the first steps on the Moon to the deepest corners of the universe.",
-        "emptyState": "No missions matched this filter.",
-        "filters": {
-            "all": "All Missions",
-            "crewed": "Crewed",
-            "robotic": "Robotic Probes",
-            "telescope": "Space Telescopes"
-        },
-        "status": {
-            "completed": "Completed",
-            "active": "Active",
-            "planned": "Planned"
-        },
-        "details": {
-            "agency": "Agency",
-            "launchDate": "Launch Date",
-            "destination": "Destination"
-        }
-    },
-    "Metadata": {
-        "title": "AstroCalendar | The Ultimate Observation Guide for Amateur Astronomers",
-        "description": "Discover sky events, space missions, and an encyclopedia for amateur astronomers.",
-        "keywords": "astronomy, space, calendar, sky events, meteor shower, planets, NASA, APOD"
+  "Navigation": {
+    "home": "Home",
+    "calendar": "Calendar",
+    "planetarium": "Planetarium",
+    "encyclopedia": "Encyclopedia",
+    "archive": "Archive",
+    "ecosystem": "Ecosystem"
+  },
+  "HomePage": {
+    "title": "Discover the Secrets of the",
+    "titleStrong": "Universe",
+    "subtitle": "The ultimate observation calendar for amateur astronomers. Upcoming meteor showers, planetary alignments, space station passes, atmospheric conditions, and NASA live feeds all in one place.",
+    "buttonTonight": "What's Up Tonight?",
+    "buttonPlan": "Plan Observation",
+    "apodLoading": "Loading NASA APOD...",
+    "apodTag": "Picture of the Day",
+    "nasaToday": "NASA",
+    "nasaTodayStrong": "Today",
+    "exploreNasa": "Open NASA APIs",
+    "apodGalleryTitle": "APOD Gallery",
+    "epicTitle": "EPIC Earth View",
+    "emptyEpic": "No EPIC imagery is available right now.",
+    "upcomingEvents": "Upcoming",
+    "upcomingEventsStrong": "Sky Events",
+    "viewAll": "View All",
+    "observationQualityLabel": "Observation Quality",
+    "emptyEvents": "No upcoming events found.",
+    "observationConditions": "Observation Conditions",
+    "observationConditionsStrong": "Tonight",
+    "moonPhase": "Moon Phase",
+    "cloudCover": "Cloud Cover",
+    "seeing": "Seeing",
+    "lightPollution": "Light Pollution",
+    "neoTitle": "Near-Earth",
+    "neoTitleStrong": "Objects",
+    "hazardous": "Potentially Hazardous",
+    "notHazardous": "Not Hazardous",
+    "missDistance": "Miss Distance",
+    "diameter": "Diameter",
+    "velocity": "Velocity",
+    "emptyNeo": "No near-Earth object passes are available for the current feed window.",
+    "donkiTitle": "Space Weather",
+    "donkiTitleStrong": "Alerts",
+    "sourceLabel": "Source",
+    "sourceField": "Source",
+    "readSource": "Read source",
+    "emptyDonki": "No recent DONKI events are available right now.",
+    "observation": {
+      "loading": "Loading live observing data...",
+      "refresh": "Refresh",
+      "useMyLocation": "Use My Location",
+      "usingDefaultLocation": "Using default location: Istanbul",
+      "usingCurrentLocation": "Using your current location",
+      "visibility": "Visibility",
+      "darknessWindow": "Darkness Window",
+      "hours": "hours",
+      "unavailable": "Unavailable",
+      "quality": {
+        "excellent": "Excellent",
+        "good": "Good",
+        "fair": "Fair",
+        "poor": "Poor"
+      },
+      "moonPhases": {
+        "newMoon": "New Moon",
+        "waxingCrescent": "Waxing Crescent",
+        "firstQuarter": "First Quarter",
+        "waxingGibbous": "Waxing Gibbous",
+        "fullMoon": "Full Moon",
+        "waningGibbous": "Waning Gibbous",
+        "lastQuarter": "Last Quarter",
+        "waningCrescent": "Waning Crescent"
+      }
     }
+  },
+  "Encyclopedia": {
+    "title": "Cosmic",
+    "titleStrong": "Encyclopedia",
+    "subtitle": "Immerse yourself in the depths of the universe. Explore planets, dwarf planets, moons, and distant galaxies.",
+    "searchPlaceholder": "Search for a celestial body...",
+    "searchButton": "Search",
+    "searchResultType": "Search Result",
+    "searchError": "Something went wrong during search or no matching body was found.",
+    "searchNoResult": "No result found.",
+    "emptyState": "There are no celestial bodies to display for this filter.",
+    "categories": {
+      "all": "All",
+      "planets": "Planets",
+      "moons": "Moons",
+      "dwarf_planets": "Dwarf Planets",
+      "galaxies": "Galaxies"
+    },
+    "bodyDetails": {
+      "type": "Type",
+      "distance": "Distance",
+      "radius": "Radius",
+      "gravity": "Gravity",
+      "discoverer": "Discoverer",
+      "readMore": "Read more on Wikipedia",
+      "viewDetails": "View Details",
+      "backToList": "Back to Encyclopedia",
+      "overview": "Overview",
+      "quickFacts": "Quick Facts"
+    }
+  },
+  "Ecosystem": {
+    "title": "Space",
+    "titleStrong": "Ecosystem",
+    "subtitle": "A practical guide to who is building what across the modern space sector, from public agencies to launch providers, lunar ventures, and prime contractors.",
+    "visitSite": "Visit Official Site"
+  },
+  "Footer": {
+    "tagline": "The ultimate observation guide and space archive for amateur astronomers.",
+    "explore": "Explore",
+    "dataSources": "Data Sources",
+    "rights": "All rights reserved among the stars."
+  },
+  "Calendar": {
+    "title": "Astronomical",
+    "titleStrong": "Calendar",
+    "subtitle": "Don't miss the most important events in the sky. Meteor showers, eclipses, occultations, and perfect observation opportunities.",
+    "eventListTitle": "Events This Month",
+    "noEventsForFilter": "No events match this filter for the selected month.",
+    "intensityLabel": "Observation Quality",
+    "previousMonth": "Previous month",
+    "nextMonth": "Next month",
+    "close": "Close",
+    "viewModes": {
+      "list": "List View",
+      "grid": "Grid View"
+    },
+    "filters": {
+      "all": "All Events",
+      "meteor": "Meteor Showers",
+      "eclipse": "Eclipses",
+      "conjunction": "Conjunctions",
+      "satellite": "Satellites & ISS",
+      "moon": "Moon Events",
+      "other": "Other"
+    }
+  },
+  "Planetarium": {
+    "title": "Interactive",
+    "titleStrong": "Sky Map",
+    "subtitle": "Explore the night sky from any location. Drag to pan, scroll to zoom, and click on stars or planets to learn more.",
+    "locationBtn": "Use My Location",
+    "fullscreenBtn": "Full Screen",
+    "detecting": "Detecting location...",
+    "city": "City",
+    "cityPlaceholder": "Enter a city name...",
+    "setLocation": "Search",
+    "cityNotFound": "City could not be found.",
+    "error": "Could not access location. Please check your browser permissions."
+  },
+  "Missions": {
+    "title": "Space",
+    "titleStrong": "Missions Archive",
+    "subtitle": "A historical timeline of humanity's greatest achievements in space exploration. From the first steps on the Moon to the deepest corners of the universe.",
+    "emptyState": "No missions matched this filter.",
+    "filters": {
+      "all": "All Missions",
+      "crewed": "Crewed",
+      "robotic": "Robotic Probes",
+      "telescope": "Space Telescopes"
+    },
+    "status": {
+      "completed": "Completed",
+      "active": "Active",
+      "planned": "Planned"
+    },
+    "details": {
+      "agency": "Agency",
+      "launchDate": "Launch Date",
+      "destination": "Destination"
+    }
+  },
+  "Metadata": {
+    "title": "AstroCalendar | The Ultimate Observation Guide for Amateur Astronomers",
+    "description": "Discover sky events, space missions, and an encyclopedia for amateur astronomers.",
+    "keywords": "astronomy, space, calendar, sky events, meteor shower, planets, NASA, APOD"
+  }
 }

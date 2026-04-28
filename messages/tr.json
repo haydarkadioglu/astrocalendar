@@ -1,154 +1,183 @@
 {
-    "Navigation": {
-        "home": "Ana Sayfa",
-        "calendar": "Takvim",
-        "planetarium": "Harita",
-        "encyclopedia": "Ansiklopedi",
-        "archive": "Arşiv"
-    },
-    "HomePage": {
-        "title": "Evrenin Sırlarını",
-        "titleStrong": "Keşfet",
-        "subtitle": "Amatör astronomlar için nihai gözlem takvimi. Yaklaşan meteor yağmurları, gezegen sıralanmaları, uzay istasyonu geçişleri ve atmosferik şartlar bir arada.",
-        "buttonTonight": "Bu Gece Neler Var?",
-        "buttonPlan": "Gözlem Planla",
-        "apodLoading": "NASA APOD görseli yükleniyor...",
-        "apodTag": "Günün Görseli",
-        "upcomingEvents": "Yaklaşan",
-        "upcomingEventsStrong": "Gökyüzü Olayları",
-        "viewAll": "Tümünü Gör",
-        "observationConditions": "Bu Gece",
-        "observationConditionsStrong": "Gözlem Şartları",
-        "moonPhase": "Ay Evresi",
-        "cloudCover": "Bulutluluk",
-        "seeing": "Atmosfer Kararlılığı",
-        "lightPollution": "Işık Kirliliği",
-        "observation": {
-            "loading": "Canlı gözlem verisi yükleniyor...",
-            "refresh": "Yenile",
-            "useMyLocation": "Konumumu Kullan",
-            "usingDefaultLocation": "Varsayılan konum kullanılıyor: İstanbul",
-            "usingCurrentLocation": "Mevcut konumunuz kullanılıyor",
-            "visibility": "Görüş Mesafesi",
-            "darknessWindow": "Karanlık Penceresi",
-            "hours": "saat",
-            "unavailable": "Kullanılamıyor",
-            "quality": {
-                "excellent": "Harika",
-                "good": "İyi",
-                "fair": "Orta",
-                "poor": "Zayıf"
-            },
-            "moonPhases": {
-                "newMoon": "Yeni Ay",
-                "waxingCrescent": "Büyüyen Hilal",
-                "firstQuarter": "İlk Dördün",
-                "waxingGibbous": "Büyüyen Şişkin Ay",
-                "fullMoon": "Dolunay",
-                "waningGibbous": "Küçülen Şişkin Ay",
-                "lastQuarter": "Son Dördün",
-                "waningCrescent": "Küçülen Hilal"
-            }
-        }
-    },
-    "Encyclopedia": {
-        "title": "Kozmik",
-        "titleStrong": "Ansiklopedi",
-        "subtitle": "Evrenin derinliklerine dalın. Gezegenleri, cüce gezegenleri, uyduları ve uzak galaksileri keşfedin.",
-        "searchPlaceholder": "Bir gök cismi arayın...",
-        "searchButton": "Ara",
-        "searchResultType": "Arama Sonucu",
-        "searchError": "Arama sırasında bir sorun oluştu veya eşleşen bir cisim bulunamadı.",
-        "searchNoResult": "Sonuç bulunamadı.",
-        "emptyState": "Bu filtre için gösterilecek gök cismi yok.",
-        "categories": {
-            "all": "Tümü",
-            "planets": "Gezegenler",
-            "moons": "Uydular",
-            "dwarf_planets": "Cüce Gezegenler",
-            "galaxies": "Galaksiler"
-        },
-        "bodyDetails": {
-            "type": "Tür",
-            "distance": "Uzaklık",
-            "radius": "Yarıçap",
-            "gravity": "Yerçekimi",
-            "discoverer": "Kaşif",
-            "readMore": "Wikipedia'da okumaya devam et",
-            "viewDetails": "Detayları Gör",
-            "backToList": "Ansiklopediye Dön",
-            "overview": "Genel Bakış",
-            "quickFacts": "Hızlı Bilgiler"
-        }
-    },
-    "Footer": {
-        "tagline": "Amatör astronomlar için nihai gözlem rehberi ve uzay arşivi.",
-        "explore": "Keşfet",
-        "dataSources": "Veri Kaynakları",
-        "rights": "Tüm hakları yıldızlarda saklıdır."
-    },
-    "Calendar": {
-        "title": "Astronomik",
-        "titleStrong": "Takvim",
-        "subtitle": "Gökyüzündeki en önemli olayları kaçırmayın. Meteor yağmurları, tutulmalar, örtülmeler ve mükemmel gözlem fırsatları.",
-        "eventListTitle": "Bu Ayın Olayları",
-        "noEventsForFilter": "Seçili ay ve filtre için olay bulunamadı.",
-        "intensityLabel": "Gözlem Şansı",
-        "previousMonth": "Önceki ay",
-        "nextMonth": "Sonraki ay",
-        "close": "Kapat",
-        "viewModes": {
-            "list": "Liste Görünümü",
-            "grid": "Izgara Görünümü"
-        },
-        "filters": {
-            "all": "Tüm Olaylar",
-            "meteor": "Meteor Yağmurları",
-            "eclipse": "Tutulmalar",
-            "conjunction": "Yakınlaşmalar",
-            "satellite": "Uydular ve ISS",
-            "moon": "Ay Olayları",
-            "other": "Diğer"
-        }
-    },
-    "Planetarium": {
-        "title": "İnteraktif",
-        "titleStrong": "Gökyüzü Haritası",
-        "subtitle": "Gece gökyüzünü dilediğiniz konumdan keşfedin. Kaydırmak için sürükleyin, yakınlaştırmak için tekerleği kullanın ve cisimlere tıklayın.",
-        "locationBtn": "Konumumu Kullan",
-        "fullscreenBtn": "Tam Ekran",
-        "detecting": "Konum tespit ediliyor...",
-        "city": "Şehir",
-        "cityPlaceholder": "Bir şehir adı girin...",
-        "setLocation": "Ara",
-        "cityNotFound": "Girdiğiniz şehir bulunamadı.",
-        "error": "Konuma erişilemedi. Lütfen tarayıcı izinlerinizi kontrol edin."
-    },
-    "Missions": {
-        "title": "Uzay",
-        "titleStrong": "Görevleri Arşivi",
-        "subtitle": "İnsanlığın uzay keşfindeki en büyük başarılarının tarihi zaman çizelgesi. Ay'daki ilk adımlardan evrenin en derin köşelerine...",
-        "emptyState": "Bu filtreyle eşleşen görev bulunamadı.",
-        "filters": {
-            "all": "Tüm Görevler",
-            "crewed": "İnsanlı",
-            "robotic": "Robotik Sondalar",
-            "telescope": "Uzay Teleskopları"
-        },
-        "status": {
-            "completed": "Tamamlandı",
-            "active": "Aktif",
-            "planned": "Planlanan"
-        },
-        "details": {
-            "agency": "Ajans",
-            "launchDate": "Fırlatma Tarihi",
-            "destination": "Hedef"
-        }
-    },
-    "Metadata": {
-        "title": "AstroCalendar | Amatör Astronomi Rehberi",
-        "description": "Gökyüzü olayları, uzay görevleri ve amatör astronomlar için nihai gözlem rehberi.",
-        "keywords": "astronomi, uzay, takvim, gökyüzü olayları, meteor yağmuru, gezegenler, NASA, APOD"
+  "Navigation": {
+    "home": "Ana Sayfa",
+    "calendar": "Takvim",
+    "planetarium": "Harita",
+    "encyclopedia": "Ansiklopedi",
+    "archive": "Arşiv",
+    "ecosystem": "Ekosistem"
+  },
+  "HomePage": {
+    "title": "Evrenin Sırlarını",
+    "titleStrong": "Keşfet",
+    "subtitle": "Amatör astronomlar için nihai gözlem takvimi. Yaklaşan meteor yağmurları, gezegen sıralanmaları, uzay istasyonu geçişleri, atmosferik şartlar ve NASA canlı verileri tek yerde.",
+    "buttonTonight": "Bu Gece Neler Var?",
+    "buttonPlan": "Gözlem Planla",
+    "apodLoading": "NASA APOD görseli yükleniyor...",
+    "apodTag": "Günün Görseli",
+    "nasaToday": "NASA",
+    "nasaTodayStrong": "Bugün",
+    "exploreNasa": "NASA API'lerini Aç",
+    "apodGalleryTitle": "APOD Galerisi",
+    "epicTitle": "EPIC Dünya Görünümü",
+    "emptyEpic": "Şu anda EPIC görseli alınamadı.",
+    "upcomingEvents": "Yaklaşan",
+    "upcomingEventsStrong": "Gökyüzü Olayları",
+    "viewAll": "Tümünü Gör",
+    "observationQualityLabel": "Gözlem Şansı",
+    "emptyEvents": "Yaklaşan etkinlik bulunamadı.",
+    "observationConditions": "Bu Gece",
+    "observationConditionsStrong": "Gözlem Şartları",
+    "moonPhase": "Ay Evresi",
+    "cloudCover": "Bulutluluk",
+    "seeing": "Atmosfer Kararlılığı",
+    "lightPollution": "Işık Kirliliği",
+    "neoTitle": "Yakın Dünya",
+    "neoTitleStrong": "Cisimleri",
+    "hazardous": "Potansiyel Riskli",
+    "notHazardous": "Riskli Değil",
+    "missDistance": "Geçiş Mesafesi",
+    "diameter": "Çap",
+    "velocity": "Hız",
+    "emptyNeo": "Mevcut besleme penceresinde yakın geçiş verisi bulunamadı.",
+    "donkiTitle": "Uzay Havası",
+    "donkiTitleStrong": "Uyarıları",
+    "sourceLabel": "Kaynak",
+    "sourceField": "Kaynak",
+    "readSource": "Kaynağı Aç",
+    "emptyDonki": "Yakın tarihli DONKI olayı bulunamadı.",
+    "observation": {
+      "loading": "Canlı gözlem verisi yükleniyor...",
+      "refresh": "Yenile",
+      "useMyLocation": "Konumumu Kullan",
+      "usingDefaultLocation": "Varsayılan konum kullanılıyor: İstanbul",
+      "usingCurrentLocation": "Mevcut konumunuz kullanılıyor",
+      "visibility": "Görüş Mesafesi",
+      "darknessWindow": "Karanlık Penceresi",
+      "hours": "saat",
+      "unavailable": "Kullanılamıyor",
+      "quality": {
+        "excellent": "Harika",
+        "good": "İyi",
+        "fair": "Orta",
+        "poor": "Zayıf"
+      },
+      "moonPhases": {
+        "newMoon": "Yeni Ay",
+        "waxingCrescent": "Büyüyen Hilal",
+        "firstQuarter": "İlk Dördün",
+        "waxingGibbous": "Büyüyen Şişkin Ay",
+        "fullMoon": "Dolunay",
+        "waningGibbous": "Küçülen Şişkin Ay",
+        "lastQuarter": "Son Dördün",
+        "waningCrescent": "Küçülen Hilal"
+      }
     }
+  },
+  "Encyclopedia": {
+    "title": "Kozmik",
+    "titleStrong": "Ansiklopedi",
+    "subtitle": "Evrenin derinliklerine dalın. Gezegenleri, cüce gezegenleri, uyduları ve uzak galaksileri keşfedin.",
+    "searchPlaceholder": "Bir gök cismi arayın...",
+    "searchButton": "Ara",
+    "searchResultType": "Arama Sonucu",
+    "searchError": "Arama sırasında bir sorun oluştu veya eşleşen bir cisim bulunamadı.",
+    "searchNoResult": "Sonuç bulunamadı.",
+    "emptyState": "Bu filtre için gösterilecek gök cismi yok.",
+    "categories": {
+      "all": "Tümü",
+      "planets": "Gezegenler",
+      "moons": "Uydular",
+      "dwarf_planets": "Cüce Gezegenler",
+      "galaxies": "Galaksiler"
+    },
+    "bodyDetails": {
+      "type": "Tür",
+      "distance": "Uzaklık",
+      "radius": "Yarıçap",
+      "gravity": "Yerçekimi",
+      "discoverer": "Kaşif",
+      "readMore": "Wikipedia'da okumaya devam et",
+      "viewDetails": "Detayları Gör",
+      "backToList": "Ansiklopediye Dön",
+      "overview": "Genel Bakış",
+      "quickFacts": "Hızlı Bilgiler"
+    }
+  },
+  "Ecosystem": {
+    "title": "Uzay",
+    "titleStrong": "Ekosistemi",
+    "subtitle": "Modern uzay sektöründe kim ne yapıyor sorusuna pratik bir rehber: kamu ajansları, fırlatma şirketleri, Ay girişimleri ve büyük yükleniciler bir arada.",
+    "visitSite": "Resmi Siteyi Aç"
+  },
+  "Footer": {
+    "tagline": "Amatör astronomlar için nihai gözlem rehberi ve uzay arşivi.",
+    "explore": "Keşfet",
+    "dataSources": "Veri Kaynakları",
+    "rights": "Tüm hakları yıldızlarda saklıdır."
+  },
+  "Calendar": {
+    "title": "Astronomik",
+    "titleStrong": "Takvim",
+    "subtitle": "Gökyüzündeki en önemli olayları kaçırmayın. Meteor yağmurları, tutulmalar, örtülmeler ve mükemmel gözlem fırsatları.",
+    "eventListTitle": "Bu Ayın Olayları",
+    "noEventsForFilter": "Seçili ay ve filtre için olay bulunamadı.",
+    "intensityLabel": "Gözlem Şansı",
+    "previousMonth": "Önceki ay",
+    "nextMonth": "Sonraki ay",
+    "close": "Kapat",
+    "viewModes": {
+      "list": "Liste Görünümü",
+      "grid": "Izgara Görünümü"
+    },
+    "filters": {
+      "all": "Tüm Olaylar",
+      "meteor": "Meteor Yağmurları",
+      "eclipse": "Tutulmalar",
+      "conjunction": "Yakınlaşmalar",
+      "satellite": "Uydular ve ISS",
+      "moon": "Ay Olayları",
+      "other": "Diğer"
+    }
+  },
+  "Planetarium": {
+    "title": "İnteraktif",
+    "titleStrong": "Gökyüzü Haritası",
+    "subtitle": "Gece gökyüzünü dilediğiniz konumdan keşfedin. Kaydırmak için sürükleyin, yakınlaştırmak için tekerleği kullanın ve cisimlere tıklayın.",
+    "locationBtn": "Konumumu Kullan",
+    "fullscreenBtn": "Tam Ekran",
+    "detecting": "Konum tespit ediliyor...",
+    "city": "Şehir",
+    "cityPlaceholder": "Bir şehir adı girin...",
+    "setLocation": "Ara",
+    "cityNotFound": "Girdiğiniz şehir bulunamadı.",
+    "error": "Konuma erişilemedi. Lütfen tarayıcı izinlerinizi kontrol edin."
+  },
+  "Missions": {
+    "title": "Uzay",
+    "titleStrong": "Görevleri Arşivi",
+    "subtitle": "İnsanlığın uzay keşfindeki en büyük başarılarının tarihi zaman çizelgesi. Ay'daki ilk adımlardan evrenin en derin köşelerine...",
+    "emptyState": "Bu filtreyle eşleşen görev bulunamadı.",
+    "filters": {
+      "all": "Tüm Görevler",
+      "crewed": "İnsanlı",
+      "robotic": "Robotik Sondalar",
+      "telescope": "Uzay Teleskopları"
+    },
+    "status": {
+      "completed": "Tamamlandı",
+      "active": "Aktif",
+      "planned": "Planlanan"
+    },
+    "details": {
+      "agency": "Ajans",
+      "launchDate": "Fırlatma Tarihi",
+      "destination": "Hedef"
+    }
+  },
+  "Metadata": {
+    "title": "AstroCalendar | Amatör Astronomi Rehberi",
+    "description": "Gökyüzü olayları, uzay görevleri ve amatör astronomlar için nihai gözlem rehberi.",
+    "keywords": "astronomi, uzay, takvim, gökyüzü olayları, meteor yağmuru, gezegenler, NASA, APOD"
+  }
 }
