@@ -1,50 +1,52 @@
-import { getTranslations } from 'next-intl/server';
-import styles from './page.module.css';
 
-const WALLPAPERS = [
-  {
-    url: 'https://apod.nasa.gov/apod/image/1901/IC405_Abolfath_3952.jpg',
-    title: 'IC 405: The Flaming Star Nebula',
-    credit: 'NASA APOD',
-  },
-  {
-    url: 'https://apod.nasa.gov/apod/image/2301/NGC2244_HaLRGBpugh1024.jpg',
-    title: 'NGC 2244: A Star Cluster in the Rosette Nebula',
-    credit: 'NASA APOD',
-  },
-  {
-    url: 'https://epic.gsfc.nasa.gov/archive/natural/2023/01/01/png/epic_1b_20230101000000.png',
-    title: 'Earth from DSCOVR EPIC',
-    credit: 'NASA EPIC',
-  },
-  {
-    url: 'https://upload.wikimedia.org/wikipedia/commons/9/99/STS-132_Atlantis_launch.jpg',
-    title: 'STS-132 Atlantis Launch',
-    credit: 'NASA/Wikipedia',
-  },
-];
 
-export default async function WallpapersPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'Wallpapers' });
+import { fetchApodGallery, fetchEpicImages } from '@/services/nasa';
+import { fetchUnsplashWallpapers } from '@/services/unsplash';
+import { fetchWikimediaWallpapers } from '@/services/wikimedia';
+import WallpapersClient from './WallpapersClient';
 
-  return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>{t('title')}</h1>
-      <div className={styles.wallpaperGrid}>
-        {WALLPAPERS.map((wp) => (
-          <div key={wp.url} className={styles.wallpaperCard}>
-            <a href={wp.url} download target="_blank" rel="noopener noreferrer">
-              <img src={wp.url} alt={wp.title} className={styles.wallpaperImg} />
-            </a>
-            <div className={styles.wallpaperInfo}>
-              <span className={styles.wallpaperTitle}>{wp.title}</span>
-              <span className={styles.wallpaperCredit}>{wp.credit}</span>
-              <a href={wp.url} download className={styles.downloadBtn}>{t('download')}</a>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+function guessCategory(title: string): string {
+  const t = title.toLowerCase();
+  if (t.includes('planet') || t.includes('mars') || t.includes('jupiter') || t.includes('venus') || t.includes('saturn')) return 'planet';
+  if (t.includes('galaxy')) return 'galaxy';
+  if (t.includes('nebula')) return 'nebula';
+  if (t.includes('earth')) return 'earth';
+  if (t.includes('moon') || t.includes('lunar')) return 'moon';
+  return 'other';
+}
+
+export default async function WallpapersPage() {
+  // Wikimedia
+  const CATEGORIES = ['planet', 'galaxy', 'nebula', 'earth', 'moon'];
+  const wikimediaResults = await Promise.all(
+    CATEGORIES.map(cat => fetchWikimediaWallpapers(cat, 8))
   );
+  const wikimediaWallpapers = wikimediaResults.flat();
+  // NASA/Unsplash
+  const [apod, epic, unsplash] = await Promise.all([
+    fetchApodGallery(8),
+    fetchEpicImages(),
+    fetchUnsplashWallpapers(12)
+  ]);
+  const allWallpapers = [
+    ...apod.filter((w: any) => w.media_type === 'image').map((w: any) => ({
+      id: w.url,
+      thumb: w.thumbnail_url || w.url,
+      full: w.hdurl || w.url,
+      title: w.title,
+      credit: 'NASA APOD',
+      category: guessCategory(w.title),
+    })),
+    ...epic.map((w: any) => ({
+      id: w.identifier,
+      thumb: w.image,
+      full: w.image,
+      title: w.caption,
+      credit: 'NASA EPIC',
+      category: guessCategory(w.caption),
+    })),
+    ...unsplash.map((w: any) => ({ ...w, category: 'galaxy' })),
+    ...wikimediaWallpapers
+  ];
+  return <WallpapersClient wallpapers={allWallpapers} />;
 }
