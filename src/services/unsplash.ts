@@ -22,7 +22,7 @@ export async function fetchUnsplashWallpapers(count = 12) {
   }
   const res = await fetch(`https://api.unsplash.com/search/photos?query=space&per_page=${count}&client_id=${accessKey}`);
   const data = await res.json();
-  return data.results.map((item) => ({
+  return data.results.map((item: any) => ({
     id: item.id,
     thumb: item.urls.thumb,
     full: item.urls.full,
