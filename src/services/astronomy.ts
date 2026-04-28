@@ -1,5 +1,8 @@
+import 'server-only';
+
 import * as cheerio from 'cheerio';
 import { AstronomyCategory, AstronomyEvent } from '@/types/astronomy';
+import { fetchText } from './http';
 
 interface EventCategoryInfo {
     category: AstronomyCategory;
@@ -9,20 +12,53 @@ interface EventCategoryInfo {
     intensityTr: string;
 }
 
-// Simple categorization helper
-function categorizeEvent(title: string): EventCategoryInfo {
-    const t = title.toLowerCase();
+const FALLBACK_EVENTS: AstronomyEvent[] = [
+    {
+        id: 'fallback-perseids',
+        titleEn: 'Perseid Meteor Shower Peak',
+        titleTr: 'Perseid Meteor Yagmuru Zirvesi',
+        dateEn: 'Aug 12/13',
+        dateTr: '12/13 Agu',
+        category: 'meteor',
+        categoryEn: 'Meteor Shower',
+        categoryTr: 'Meteor Yagmuru',
+        descriptionEn: 'One of the most reliable annual meteor showers, often producing bright and frequent meteors.',
+        descriptionTr: 'Her yil guvenilir sekilde gozlenen, parlak ve sik meteorlar uretebilen yillik meteor yagmurlarindan biridir.',
+        intensityEn: 'High',
+        intensityTr: 'Yuksek',
+        rawDate: new Date(`${new Date().getFullYear()}-08-12T00:00:00Z`).getTime()
+    },
+    {
+        id: 'fallback-geminids',
+        titleEn: 'Geminid Meteor Shower Peak',
+        titleTr: 'Geminid Meteor Yagmuru Zirvesi',
+        dateEn: 'Dec 13/14',
+        dateTr: '13/14 Ara',
+        category: 'meteor',
+        categoryEn: 'Meteor Shower',
+        categoryTr: 'Meteor Yagmuru',
+        descriptionEn: 'The Geminids are typically among the strongest meteor showers of the year.',
+        descriptionTr: 'Geminidler genellikle yilin en guclu meteor yagmurlarindan biri olarak kabul edilir.',
+        intensityEn: 'High',
+        intensityTr: 'Yuksek',
+        rawDate: new Date(`${new Date().getFullYear()}-12-13T00:00:00Z`).getTime()
+    }
+];
 
-    if (t.includes('meteor')) {
+function categorizeEvent(title: string): EventCategoryInfo {
+    const normalized = title.toLowerCase();
+
+    if (normalized.includes('meteor')) {
         return {
             category: 'meteor',
             categoryEn: 'Meteor Shower',
-            categoryTr: 'Meteor Yağmuru',
+            categoryTr: 'Meteor Yagmuru',
             intensityEn: 'High',
-            intensityTr: 'Yüksek'
+            intensityTr: 'Yuksek'
         };
     }
-    if (t.includes('eclipse')) {
+
+    if (normalized.includes('eclipse')) {
         return {
             category: 'eclipse',
             categoryEn: 'Eclipse',
@@ -31,20 +67,29 @@ function categorizeEvent(title: string): EventCategoryInfo {
             intensityTr: 'Harika'
         };
     }
-    if (t.includes('moon') || t.includes('earthshine')) {
+
+    if (normalized.includes('moon') || normalized.includes('earthshine')) {
         return {
             category: 'moon',
             categoryEn: 'Moon Event',
-            categoryTr: 'Ay Olayı',
+            categoryTr: 'Ay Olayi',
             intensityEn: 'Good',
-            intensityTr: 'İyi'
+            intensityTr: 'Iyi'
         };
     }
-    if (t.includes('conjunction') || t.includes('opposition') || t.includes('elongation') || t.includes('perihelion') || t.includes('equinox') || t.includes('solstice')) {
+
+    if (
+        normalized.includes('conjunction')
+        || normalized.includes('opposition')
+        || normalized.includes('elongation')
+        || normalized.includes('perihelion')
+        || normalized.includes('equinox')
+        || normalized.includes('solstice')
+    ) {
         return {
             category: 'conjunction',
             categoryEn: 'Planetary Event',
-            categoryTr: 'Gezegen Olayı',
+            categoryTr: 'Gezegen Olayi',
             intensityEn: 'Moderate',
             intensityTr: 'Orta'
         };
@@ -53,83 +98,92 @@ function categorizeEvent(title: string): EventCategoryInfo {
     return {
         category: 'other',
         categoryEn: 'Astronomy Event',
-        categoryTr: 'Gökyüzü Olayı',
+        categoryTr: 'Gokyuzu Olayi',
         intensityEn: 'Varies',
-        intensityTr: 'Değişken'
+        intensityTr: 'Degisken'
     };
 }
 
-// Date translation helper (very naive for demonstration)
 function translateDateInfo(dateStr: string): string {
     const months: Record<string, string> = {
-        'Jan': 'Oca', 'Feb': 'Şub', 'Mar': 'Mar', 'Apr': 'Nis',
-        'May': 'May', 'Jun': 'Haz', 'Jul': 'Tem', 'Aug': 'Ağu',
-        'Sep': 'Eyl', 'Oct': 'Eki', 'Nov': 'Kas', 'Dec': 'Ara'
+        Jan: 'Oca',
+        Feb: 'Sub',
+        Mar: 'Mar',
+        Apr: 'Nis',
+        May: 'May',
+        Jun: 'Haz',
+        Jul: 'Tem',
+        Aug: 'Agu',
+        Sep: 'Eyl',
+        Oct: 'Eki',
+        Nov: 'Kas',
+        Dec: 'Ara'
     };
 
     let result = dateStr;
-    Object.keys(months).forEach(enMonth => {
+    Object.keys(months).forEach((enMonth) => {
         result = result.replace(enMonth, months[enMonth]);
     });
     return result;
 }
 
-// Parse "Jan 3" or "Jan 3/4" into a valid Date object for the current year
 function parseEventDate(dateStr: string, year: number): Date {
     const cleanDate = dateStr.split('/')[0].trim();
     return new Date(`${cleanDate} ${year}`);
 }
 
+function buildFallbackEvents() {
+    return [...FALLBACK_EVENTS].sort((a, b) => a.rawDate - b.rawDate);
+}
+
 export async function fetchAstronomicalEvents(): Promise<AstronomyEvent[]> {
     try {
-        const res = await fetch('https://www.timeanddate.com/astronomy/sights-to-see.html', {
-            next: { revalidate: 86400 } // Cache for 24 hours
+        const html = await fetchText('https://www.timeanddate.com/astronomy/sights-to-see.html', {
+            revalidate: 86400
         });
 
-        if (!res.ok) {
-            throw new Error(`Failed to fetch events, status: ${res.status}`);
-        }
-
-        const html = await res.text();
         const $ = cheerio.load(html);
         const events: AstronomyEvent[] = [];
         const currentYear = new Date().getFullYear();
 
         $('article h2, article h3, .article__content h2, .article__content h3').each((i, el) => {
             const rawText = $(el).text().trim();
-            // Expected format: "Jan 3: Wolf Moon" or "Jan 3/4: Quadrantid Meteor Shower"
-            if (!rawText.includes(':')) return;
+            if (!rawText.includes(':')) {
+                return;
+            }
 
             const [datePart, ...titleParts] = rawText.split(':');
             const title = titleParts.join(':').trim();
             const dateEn = datePart.trim();
+            const nextParagraph = $(el).nextUntil('h2, h3').filter('p').first().text().trim();
 
-            const nextP = $(el).nextUntil('h2, h3').filter('p').first().text().trim();
-
-            if (title && nextP) {
-                const categoryInfo = categorizeEvent(title);
-                const eventDate = parseEventDate(dateEn, currentYear);
-
-                events.push({
-                    id: `event-${i}`,
-                    titleEn: title,
-                    titleTr: title,
-                    dateEn: dateEn,
-                    dateTr: translateDateInfo(dateEn),
-                    descriptionEn: nextP,
-                    descriptionTr: nextP,
-                    rawDate: eventDate.getTime(),
-                    ...categoryInfo
-                });
+            if (!title || !nextParagraph) {
+                return;
             }
+
+            const categoryInfo = categorizeEvent(title);
+            const eventDate = parseEventDate(dateEn, currentYear);
+
+            events.push({
+                id: `event-${i}`,
+                titleEn: title,
+                titleTr: title,
+                dateEn,
+                dateTr: translateDateInfo(dateEn),
+                descriptionEn: nextParagraph,
+                descriptionTr: nextParagraph,
+                rawDate: eventDate.getTime(),
+                ...categoryInfo
+            });
         });
 
-        // Sort chronologically
-        events.sort((a, b) => a.rawDate - b.rawDate);
+        if (events.length === 0) {
+            return buildFallbackEvents();
+        }
 
-        return events;
+        return events.sort((a, b) => a.rawDate - b.rawDate);
     } catch (error) {
-        console.error('Scraping error:', error);
-        return [];
+        console.error('Failed to fetch astronomical events:', error);
+        return buildFallbackEvents();
     }
 }

@@ -1,42 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { isValidLocale } from '@/i18n/routing';
+import { fetchWikiSummaryByQuery } from '@/services/wikipedia';
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
-    const query = searchParams.get('q');
-    const lang = searchParams.get('lang') || 'tr';
+    const query = searchParams.get('q')?.trim();
+    const langParam = searchParams.get('lang') || 'tr';
+    const lang = isValidLocale(langParam) ? langParam : 'tr';
 
     if (!query) {
         return NextResponse.json({ error: 'Query parameter "q" is required' }, { status: 400 });
     }
 
+    if (query.length > 120) {
+        return NextResponse.json({ error: 'Query is too long' }, { status: 400 });
+    }
+
     try {
-        // Step 1: Use Wikipedia Search API to find the exact page title
-        // This makes the search forgiving of typos and casing
-        const searchUrl = `https://${lang}.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&utf8=&format=json`;
-        const searchRes = await fetch(searchUrl);
+        const data = await fetchWikiSummaryByQuery(query, lang);
 
-        if (!searchRes.ok) {
-            return NextResponse.json({ error: 'Wiki search request failed' }, { status: searchRes.status });
-        }
-
-        const searchData = await searchRes.json();
-        const searchResults = searchData.query?.search;
-
-        if (!searchResults || searchResults.length === 0) {
+        if (!data) {
             return NextResponse.json({ error: 'Wiki page not found' }, { status: 404 });
         }
 
-        // Step 2: Fetch the summary using the exact title of the first search result
-        const exactTitle = searchResults[0].title;
-
-        const summaryUrl = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(exactTitle)}`;
-        const summaryRes = await fetch(summaryUrl, { next: { revalidate: 3600 } });
-
-        if (!summaryRes.ok) {
-            return NextResponse.json({ error: 'Wiki summary not found' }, { status: summaryRes.status });
-        }
-
-        const data = await summaryRes.json();
         return NextResponse.json(data);
     } catch (error) {
         console.error('Wiki API Error:', error);
