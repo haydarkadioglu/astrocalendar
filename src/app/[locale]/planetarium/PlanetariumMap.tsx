@@ -69,9 +69,9 @@ export default function PlanetariumMap() {
         }
     };
 
-    // The virtual sky iframe URL using polar to form a dome, but we scale it out via CSS.
-    // az=180 looks south.
-    const iframeUrl = `https://virtualsky.lco.global/embed/index.html?longitude=${lon}&latitude=${lat}&projection=polar&constellations=true&constellationlabels=true&meteorshowers=true&showstarlabels=true&showplanets=true&live=true&mouse=true`;
+    // Use a stereo projection so dragging feels like panning across the sky
+    // rather than rotating a polar dome around the center.
+    const iframeUrl = `https://virtualsky.lco.global/embed/index.html?longitude=${lon}&latitude=${lat}&projection=stereo&width=1200&height=720&constellations=true&constellationlabels=true&meteorshowers=true&showstarlabels=true&showplanets=true&showposition=true&showdate=true&cardinalpoints=true&live=true&mouse=true`;
 
     return (
         <div className={styles.container}>
@@ -117,16 +117,14 @@ export default function PlanetariumMap() {
 
             <div className={styles.mapWrapper}>
                 <div id="planetarium-container" className={styles.mapContainer}>
-                    <div className={styles.iframeZoomer}>
-                        <iframe
-                            src={iframeUrl}
-                            width="100%"
-                            height="100%"
-                            style={{ border: 0 }}
-                            allowFullScreen
-                            title="VirtualSky Interactive Planetarium"
-                        />
-                    </div>
+                    <iframe
+                        src={iframeUrl}
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0, display: 'block' }}
+                        allowFullScreen
+                        title="VirtualSky Interactive Planetarium"
+                    />
                 </div>
             </div>
         </div>

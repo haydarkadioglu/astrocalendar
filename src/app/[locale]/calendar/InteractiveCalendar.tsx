@@ -41,12 +41,13 @@ export default function InteractiveCalendar({ events, locale }: InteractiveCalen
 
     const currentMonthEvents = useMemo(() => {
         return events.filter((event) => {
-            const evMonthStr = event.dateEn.split(' ')[0];
-            const eventMonth = new Date(`${evMonthStr} 1 2000`).getMonth();
+            const eventDate = new Date(event.rawDate);
+            const eventMonth = eventDate.getMonth();
+            const eventYear = eventDate.getFullYear();
             const filterMatch = activeFilter === 'all' || event.category === activeFilter;
-            return eventMonth === month && filterMatch;
+            return eventMonth === month && eventYear === year && filterMatch;
         });
-    }, [activeFilter, events, month]);
+    }, [activeFilter, events, month, year]);
 
     const nextMonth = () => setCurrentDate(new Date(year, month + 1, 1));
     const prevMonth = () => setCurrentDate(new Date(year, month - 1, 1));
@@ -154,7 +155,7 @@ export default function InteractiveCalendar({ events, locale }: InteractiveCalen
                             {locale === 'tr' ? selectedEvent.categoryTr : selectedEvent.categoryEn}
                         </span>
                         <h3>{locale === 'tr' ? selectedEvent.titleTr : selectedEvent.titleEn}</h3>
-                        <p className={styles.modalDate}>{locale === 'tr' ? selectedEvent.dateTr : selectedEvent.dateEn} {year}</p>
+                        <p className={styles.modalDate}>{locale === 'tr' ? selectedEvent.dateTr : selectedEvent.dateEn} {new Date(selectedEvent.rawDate).getFullYear()}</p>
                         <hr className={styles.divider} />
                         <p className={styles.modalDesc}>{locale === 'tr' ? selectedEvent.descriptionTr : selectedEvent.descriptionEn}</p>
                         <p className={styles.modalMeta}>

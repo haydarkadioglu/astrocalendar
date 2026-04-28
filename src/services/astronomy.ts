@@ -132,6 +132,19 @@ function parseEventDate(dateStr: string, year: number): Date {
     return new Date(`${cleanDate} ${year}`);
 }
 
+function normalizeToNextOccurrence(dateStr: string, now: Date) {
+    const currentYear = now.getFullYear();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    let eventDate = parseEventDate(dateStr, currentYear);
+
+    if (eventDate.getTime() < today.getTime()) {
+        eventDate = parseEventDate(dateStr, currentYear + 1);
+    }
+
+    return eventDate;
+}
+
 function buildFallbackEvents() {
     return [...FALLBACK_EVENTS].sort((a, b) => a.rawDate - b.rawDate);
 }
@@ -144,7 +157,7 @@ export async function fetchAstronomicalEvents(): Promise<AstronomyEvent[]> {
 
         const $ = cheerio.load(html);
         const events: AstronomyEvent[] = [];
-        const currentYear = new Date().getFullYear();
+        const now = new Date();
 
         $('article h2, article h3, .article__content h2, .article__content h3').each((i, el) => {
             const rawText = $(el).text().trim();
@@ -162,7 +175,7 @@ export async function fetchAstronomicalEvents(): Promise<AstronomyEvent[]> {
             }
 
             const categoryInfo = categorizeEvent(title);
-            const eventDate = parseEventDate(dateEn, currentYear);
+            const eventDate = normalizeToNextOccurrence(dateEn, now);
 
             events.push({
                 id: `event-${i}`,
